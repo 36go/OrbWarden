@@ -1,0 +1,12 @@
+## ✨ What's Changed
+
+1. Added support for selecting Discord or Vesktop as the CDP client, with automatic detection and custom installation support.
+2. Fixed the Nitro Orbs countdown. It now uses Discord's server-provided reward time, so it is accurate across timezones and month lengths.
+3. Improved CDP login and quest startup reliability by retrying transient connection failures and preventing stale quest modes from being used after login.
+4. Fixed dashboard quest tabs being truncated in narrower windows.
+5. Bumped dependencies to the latest patched versions.
+6. Bumped default client config:
+    - client version to `1.0.9256`
+    - Electron version to `42.9.0`
+    - default client build number to `607562`
+    - native build number to `89799`

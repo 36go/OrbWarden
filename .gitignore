@@ -1,0 +1,29 @@
+# Secrets — NEVER push real tokens
+.env
+
+# Python bot runtime data
+quest_state.json
+__pycache__/
+*.pyc
+bot.log
+bot.err.log
+*.log
+
+# Node / frontend build artifacts
+node_modules/
+dist/
+
+# Rust build artifacts
+target/
+src-runner/target/
+
+# Local release artifacts / downloaded archives
+dqh-0.10.4-portable.zip
+discord-quest-helper-app/
+discord-quest-helper.exe
+
+# Editor / OS
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
