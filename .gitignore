@@ -16,6 +16,8 @@ dist/
 # Rust build artifacts
 target/
 src-runner/target/
+src-tauri/data/stagecraft.exe
+src-tauri/binaries/
 
 # Local release artifacts / downloaded archives
 dqh-0.10.4-portable.zip
