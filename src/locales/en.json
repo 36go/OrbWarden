@@ -113,9 +113,7 @@
     "current_orbs": "Current Orbs",
     "nitro_next_orbs_title": "Monthly Nitro Orbs — next claim countdown",
     "nitro_next_orbs_days": "Next Orbs airdrop in {days} days",
-
     "nitro_next_orbs_hours": "Next Orbs airdrop in {hours} hours",
-
     "nitro_next_orbs_minutes": "Next Orbs airdrop in {minutes} minutes",
     "claim_reward": "Claim Reward",
     "claim_navigated": "Discord has been redirected to the quest page. Please claim your reward there.",
@@ -375,7 +373,10 @@
     "switch_account": "Switch account",
     "switch_to": "Switch to {name}",
     "remove": "Remove",
-    "current_account": "Current"
+    "current_account": "Current",
+    "add_account": "Add account",
+    "add_account_desc": "Add another account to switch between accounts without logging out.",
+    "added_account": "Switched to {name}"
   },
   "dialog": {
     "accept_quests_title": "Accept Quests",

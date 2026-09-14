@@ -366,7 +366,10 @@
     "type_app": "Aplicación"
   },
   "account": {
-    "select_desc": "Se encontraron varios tokens de Discord válidos. Selecciona qué cuenta usar:"
+    "select_desc": "Se encontraron varios tokens de Discord válidos. Selecciona qué cuenta usar:",
+    "add_account": "Añadir cuenta",
+    "add_account_desc": "Añade otra cuenta para cambiar entre ellas sin cerrar sesión.",
+    "added_account": "Cambiado a {name}"
   },
   "dialog": {
     "accept_quests_title": "Aceptar misiones",

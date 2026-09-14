@@ -366,7 +366,10 @@
     "type_app": "Aplikasi"
   },
   "account": {
-    "select_desc": "Ditemukan beberapa token Discord yang valid. Silakan pilih akun mana yang akan digunakan:"
+    "select_desc": "Ditemukan beberapa token Discord yang valid. Silakan pilih akun mana yang akan digunakan:",
+    "add_account": "Tambah akun",
+    "add_account_desc": "Tambahkan akun lain untuk berpindah antar akun tanpa keluar.",
+    "added_account": "Berpindah ke {name}"
   },
   "dialog": {
     "accept_quests_title": "Terima Quests",

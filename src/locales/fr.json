@@ -366,7 +366,10 @@
     "type_app": "Application"
   },
   "account": {
-    "select_desc": "Plusieurs jetons Discord valides ont été trouvés. Veuillez sélectionner le compte à utiliser :"
+    "select_desc": "Plusieurs jetons Discord valides ont été trouvés. Veuillez sélectionner le compte à utiliser :",
+    "add_account": "Ajouter un compte",
+    "add_account_desc": "Ajoutez un autre compte pour basculer entre eux sans vous déconnecter.",
+    "added_account": "Basculé vers {name}"
   },
   "dialog": {
     "accept_quests_title": "Accepter Quests",

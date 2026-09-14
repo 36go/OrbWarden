@@ -2,8 +2,9 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { ChevronDown, LogOut, Trash2, ArrowLeftRight } from 'lucide-vue-next'
+import { ChevronDown, LogOut, Trash2, ArrowLeftRight, UserPlus } from 'lucide-vue-next'
 import { useI18n } from 'vue-i18n'
+import AddAccountDialog from '@/components/auth/AddAccountDialog.vue'
 
 const { t } = useI18n()
 const authStore = useAuthStore()
@@ -11,6 +12,7 @@ const emit = defineEmits<{ logout: [] }>()
 
 const user = computed(() => authStore.user)
 const open = ref(false)
+const addAccountOpen = ref(false)
 const switchingId = ref<string | null>(null)
 const containerRef = ref<HTMLElement | null>(null)
 
@@ -53,6 +55,11 @@ async function handleSwitch(userId: string) {
 
 function handleRemove(userId: string) {
   authStore.removeSavedAccount(userId)
+}
+
+function handleAddAccount() {
+  open.value = false
+  addAccountOpen.value = true
 }
 
 onMounted(() => document.addEventListener('mousedown', handleClickOutside))
@@ -149,8 +156,20 @@ onUnmounted(() => document.removeEventListener('mousedown', handleClickOutside))
               <Trash2 class="w-3.5 h-3.5" />
             </button>
           </div>
-          <div class="h-px bg-border mx-2 mt-1" />
         </div>
+
+        <div class="h-px bg-border mx-2 my-1" />
+
+        <!-- Add account -->
+        <button
+          class="w-full px-3 py-2 text-left text-sm hover:bg-muted/60 transition-colors inline-flex items-center gap-2"
+          @click="handleAddAccount"
+        >
+          <UserPlus class="w-4 h-4" />
+          {{ t('account.add_account') }}
+        </button>
+
+        <div class="h-px bg-border mx-2 my-1" />
 
         <!-- Logout -->
         <button
@@ -162,5 +181,7 @@ onUnmounted(() => document.removeEventListener('mousedown', handleClickOutside))
         </button>
       </div>
     </Transition>
+
+    <AddAccountDialog v-model:open="addAccountOpen" />
   </div>
 </template>

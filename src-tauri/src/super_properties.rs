@@ -341,6 +341,9 @@ pub struct XSuperPropertiesManager {
     extracted_base64: Option<String>,
     source_mode: SourceMode,       // Current data source mode
     source_client: Option<String>, // e.g., "Stable", "Canary", "PTB"
+    // Most recent Remote JS build scrape, so login does not re-download
+    // Discord's JavaScript when a fresh build number is already known.
+    last_remote_js_fetch: Option<std::time::Instant>,
     // Dynamically obtained client information
     client_version: Option<String>, // e.g., "1.0.9219"
     native_build_number: Option<u64>,
@@ -360,6 +363,7 @@ impl XSuperPropertiesManager {
             extracted_base64: None,
             source_mode: SourceMode::Default,
             source_client: None,
+            last_remote_js_fetch: None,
             client_version: None,
             native_build_number: None,
             header_profile: HeaderProfile::new(),
@@ -398,9 +402,23 @@ impl XSuperPropertiesManager {
     pub fn set_from_remote_js(&mut self, build_number: u64) {
         self.cached_build_number = Some(build_number);
         self.source_mode = SourceMode::RemoteJs;
+        self.last_remote_js_fetch = Some(std::time::Instant::now());
         // Clear other CDP data
         self.extracted_base64 = None;
         self.cached_super_properties = None;
+    }
+
+    /// Returns the cached build number from a Remote JS scrape that happened
+    /// within `max_age`, allowing quick re-logins to skip the network fetch.
+    pub fn remote_js_build_within(&self, max_age: std::time::Duration) -> Option<u64> {
+        if self.source_mode != SourceMode::RemoteJs {
+            return None;
+        }
+        let fetched_at = self.last_remote_js_fetch?;
+        if fetched_at.elapsed() > max_age {
+            return None;
+        }
+        self.cached_build_number
     }
 
     /// Gets the current source mode
@@ -451,6 +469,7 @@ impl XSuperPropertiesManager {
         self.cached_super_properties = None;
         self.extracted_base64 = None;
         self.source_mode = SourceMode::Default;
+        self.last_remote_js_fetch = None;
         self.client_version = None;
         self.native_build_number = None;
         // Regenerate session IDs

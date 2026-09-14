@@ -71,7 +71,7 @@ New-Item -ItemType Directory -Force -Path $PackageDir | Out-Null
 
 # Copy files (runner is embedded in the main executable via include_bytes!)
 $MainExe = Join-Path $ReleaseDir "discord-quest-helper.exe"
-$CdpLauncher = Join-Path $SrcTauri "binaries\discord-cdp-launcher-sidecar-x86_64-pc-windows-msvc.exe"
+$CdpLauncher = Join-Path $SrcTauri "binaries\waybridge-x86_64-pc-windows-msvc.exe"
 
 if (-not (Test-Path $MainExe)) {
     throw "Main executable not found: $MainExe"
@@ -82,8 +82,8 @@ if (-not (Test-Path $CdpLauncher)) {
 
 Write-Host "  Copying discord-quest-helper.exe..." -ForegroundColor DarkGray
 Copy-Item $MainExe -Destination $PackageDir
-Write-Host "  Copying discord-cdp-launcher-sidecar.exe..." -ForegroundColor DarkGray
-Copy-Item $CdpLauncher -Destination (Join-Path $PackageDir "discord-cdp-launcher-sidecar.exe")
+Write-Host "  Copying waybridge.exe..." -ForegroundColor DarkGray
+Copy-Item $CdpLauncher -Destination (Join-Path $PackageDir "waybridge.exe")
 
 Write-Host "  Package structure prepared." -ForegroundColor Green
 

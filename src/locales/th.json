@@ -366,7 +366,10 @@
     "type_app": "แอพ"
   },
   "account": {
-    "select_desc": "พบโทเค็น Discord ที่ถูกต้องหลายรายการ โปรดเลือกบัญชีที่จะใช้:"
+    "select_desc": "พบโทเค็น Discord ที่ถูกต้องหลายรายการ โปรดเลือกบัญชีที่จะใช้:",
+    "add_account": "เพิ่มบัญชี",
+    "add_account_desc": "เพิ่มอีกบัญชีเพื่อสลับระหว่างบัญชีโดยไม่ต้องออกจากระบบ",
+    "added_account": "เปลี่ยนเป็น {name}"
   },
   "dialog": {
     "accept_quests_title": "ยอมรับ Quests",

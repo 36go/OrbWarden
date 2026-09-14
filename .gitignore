@@ -23,6 +23,7 @@ src-tauri/binaries/
 dqh-0.10.4-portable.zip
 discord-quest-helper-app/
 discord-quest-helper.exe
+discord-quest-helper-v*.zip
 
 # Editor / OS
 .vscode/

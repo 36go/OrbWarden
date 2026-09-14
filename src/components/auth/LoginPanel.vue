@@ -60,6 +60,8 @@ import {
 
 const CDP_POLL_INTERVAL_MS = 5_000
 
+withDefaults(defineProps<{ embedded?: boolean }>(), { embedded: false })
+
 const { t } = useI18n()
 const authStore = useAuthStore()
 const questsStore = useQuestsStore()
@@ -618,13 +620,13 @@ watch(() => questsStore.cdpPort, () => {
 <template>
   <section
     class="login-panel-stage mx-auto my-auto flex w-full max-w-2xl flex-col gap-6 py-4 sm:py-8"
-    aria-labelledby="login-heading"
+    :aria-labelledby="embedded ? undefined : 'login-heading'"
   >
-    <div class="flex justify-center">
+    <div v-if="!embedded" class="flex justify-center">
       <slot name="toolbar" />
     </div>
 
-    <div class="login-brand-stage flex justify-center py-2 sm:py-4">
+    <div v-if="!embedded" class="login-brand-stage flex justify-center py-2 sm:py-4">
       <div class="flex items-center gap-3 sm:gap-4">
         <img src="/icons/logo.png" :alt="t('general.title')" class="h-12 w-12 select-none sm:h-14 sm:w-14" />
         <div>

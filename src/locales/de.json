@@ -366,7 +366,10 @@
     "type_app": "App"
   },
   "account": {
-    "select_desc": "Mehrere gültige Discord-Token gefunden. Bitte wählen Sie aus, welches Konto Sie verwenden möchten:"
+    "select_desc": "Mehrere gültige Discord-Token gefunden. Bitte wählen Sie aus, welches Konto Sie verwenden möchten:",
+    "add_account": "Konto hinzufügen",
+    "add_account_desc": "Fügen Sie ein weiteres Konto hinzu, um ohne Abmeldung zu wechseln.",
+    "added_account": "Zu {name} gewechselt"
   },
   "dialog": {
     "accept_quests_title": "Akzeptieren Quests",

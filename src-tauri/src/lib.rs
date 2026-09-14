@@ -537,29 +537,53 @@ async fn set_token(
 
     // Priority 2: Remote JS (Fallback)
     if !cdp_success {
-        // Get build_number
-        match token_extractor::fetch_build_number_from_discord().await {
-            Ok(build_number) => {
+        // Reuse a recent Remote JS build number instead of re-downloading
+        // Discord's JavaScript on quick subsequent logins.
+        const REMOTE_JS_MAX_AGE: std::time::Duration = std::time::Duration::from_secs(30 * 60);
+        let build_number = match SUPER_PROPERTIES_MANAGER
+            .lock()
+            .ok()
+            .and_then(|manager| manager.remote_js_build_within(REMOTE_JS_MAX_AGE))
+        {
+            Some(build_number) => {
                 log(
                     LogLevel::Info,
                     LogCategory::TokenExtraction,
                     &format!(
-                        "Successfully fetched build number from JS: {}",
+                        "Reusing recently fetched build number from JS: {}",
                         build_number
                     ),
                     None,
                 );
-                if let Ok(mut manager) = SUPER_PROPERTIES_MANAGER.lock() {
-                    manager.set_from_remote_js(build_number);
-                }
+                Some(build_number)
             }
-            Err(e) => {
-                log(
-                    LogLevel::Warn,
-                    LogCategory::TokenExtraction,
-                    &format!("Failed to fetch build number from JS: {}", e),
-                    None,
-                );
+            None => match token_extractor::fetch_build_number_from_discord().await {
+                Ok(build_number) => {
+                    log(
+                        LogLevel::Info,
+                        LogCategory::TokenExtraction,
+                        &format!(
+                            "Successfully fetched build number from JS: {}",
+                            build_number
+                        ),
+                        None,
+                    );
+                    Some(build_number)
+                }
+                Err(e) => {
+                    log(
+                        LogLevel::Warn,
+                        LogCategory::TokenExtraction,
+                        &format!("Failed to fetch build number from JS: {}", e),
+                        None,
+                    );
+                    None
+                }
+            },
+        };
+        if let Some(build_number) = build_number {
+            if let Ok(mut manager) = SUPER_PROPERTIES_MANAGER.lock() {
+                manager.set_from_remote_js(build_number);
             }
         }
     }
@@ -2248,7 +2272,27 @@ async fn auto_fetch_super_properties(cdp_port: Option<u16>) -> serde_json::Value
     );
 
     // Priority 2: Try Remote JS
-    if let Ok(build_number) = token_extractor::fetch_build_number_from_discord().await {
+    const REMOTE_JS_MAX_AGE: std::time::Duration = std::time::Duration::from_secs(30 * 60);
+    let build_number = SUPER_PROPERTIES_MANAGER
+        .lock()
+        .ok()
+        .and_then(|manager| manager.remote_js_build_within(REMOTE_JS_MAX_AGE));
+    let build_number = match build_number {
+        Some(build_number) => {
+            log(
+                LogLevel::Info,
+                LogCategory::TokenExtraction,
+                &format!(
+                    "Reusing recently fetched build number from JS: {}",
+                    build_number
+                ),
+                None,
+            );
+            Some(build_number)
+        }
+        None => token_extractor::fetch_build_number_from_discord().await.ok(),
+    };
+    if let Some(build_number) = build_number {
         if let Ok(mut manager) = SUPER_PROPERTIES_MANAGER.lock() {
             manager.set_from_remote_js(build_number);
             log(

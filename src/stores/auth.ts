@@ -138,17 +138,17 @@ export const useAuthStore = defineStore('auth', () => {
         saveAccount(user.value.id, tokenValue, user.value)
       }
 
-      // After successful login, wait for SuperProperties fetch to complete
-      // This ensures all data is ready before ending the loading state
-      try {
-        const questsStore = useQuestsStore()
-        await autoFetchSuperProperties(questsStore.cdpPort)
+      // The backend already primed the request identity inside set_token
+      // (CDP -> Remote JS -> defaults), so do not block the login spinner on a
+      // second SuperProperties fetch round. Refresh it in the background the
+      // same way the rest of the post-login data is loaded.
+      const questsStore = useQuestsStore()
+      autoFetchSuperProperties(questsStore.cdpPort).catch(e => {
+        // SuperProperties refresh failure should not surface during login
+        console.warn('Failed to refresh SuperProperties after login:', e)
+      })
 
-        bootstrapAfterLogin(questsStore, 'CDP init on login failed:')
-      } catch (e) {
-        // SuperProperties fetch failure should not block login
-        console.warn('Failed to fetch SuperProperties:', e)
-      }
+      bootstrapAfterLogin(questsStore, 'CDP init on login failed:')
 
       onProgress?.(completeAuthProgress())
 

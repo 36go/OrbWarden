@@ -366,7 +366,10 @@
     "type_app": "ứng dụng"
   },
   "account": {
-    "select_desc": "Đã tìm thấy nhiều mã thông báo Discord hợp lệ. Vui lòng chọn tài khoản sẽ sử dụng:"
+    "select_desc": "Đã tìm thấy nhiều mã thông báo Discord hợp lệ. Vui lòng chọn tài khoản sẽ sử dụng:",
+    "add_account": "Thêm tài khoản",
+    "add_account_desc": "Thêm tài khoản khác để chuyển đổi giữa các tài khoản mà không cần đăng xuất.",
+    "added_account": "Đã chuyển sang {name}"
   },
   "dialog": {
     "accept_quests_title": "Chấp nhận Quests",

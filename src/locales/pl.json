@@ -366,7 +366,10 @@
     "type_app": "Aplikacja"
   },
   "account": {
-    "select_desc": "Znaleziono wiele ważnych tokenów Discord. Wybierz konto, którego chcesz użyć:"
+    "select_desc": "Znaleziono wiele ważnych tokenów Discord. Wybierz konto, którego chcesz użyć:",
+    "add_account": "Dodaj konto",
+    "add_account_desc": "Dodaj kolejne konto, aby przełączać się bez wylogowywania.",
+    "added_account": "Przełączono na {name}"
   },
   "dialog": {
     "accept_quests_title": "Zaakceptuj Quests",

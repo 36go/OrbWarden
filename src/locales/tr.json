@@ -366,7 +366,10 @@
     "type_app": "Uygulama"
   },
   "account": {
-    "select_desc": "Birden fazla geçerli Discord belirteci bulundu. Lütfen hangi hesabı kullanacağınızı seçin:"
+    "select_desc": "Birden fazla geçerli Discord belirteci bulundu. Lütfen hangi hesabı kullanacağınızı seçin:",
+    "add_account": "Hesap ekle",
+    "add_account_desc": "Çıkış yapmadan başka bir hesap ekleyip aralarında geçiş yapabilirsiniz.",
+    "added_account": "{name} hesabına geçildi"
   },
   "dialog": {
     "accept_quests_title": "Kabul et Quests",

@@ -366,7 +366,10 @@
     "type_app": "應用"
   },
   "account": {
-    "select_desc": "發現多個有效的 Discord Token，請選擇要使用的帳號："
+    "select_desc": "發現多個有效的 Discord Token，請選擇要使用的帳號：",
+    "add_account": "新增帳號",
+    "add_account_desc": "無需登出即可新增另一個帳號，方便隨時切換。",
+    "added_account": "已切換到 {name}"
   },
   "dialog": {
     "accept_quests_title": "接受任務",
