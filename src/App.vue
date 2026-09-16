@@ -8,7 +8,9 @@ import TitleBar from './components/TitleBar.vue'
 import { Button } from '@/components/ui/button'
 import { useAuthStore } from '@/stores/auth'
 import { useVersionStore } from '@/stores/version'
+import { useToastStore } from '@/stores/toast'
 import { useI18n } from 'vue-i18n'
+import { open } from '@tauri-apps/plugin-shell'
 import { Moon, Sun, Languages } from 'lucide-vue-next'
 import AccountMenu from './components/AccountMenu.vue'
 import AppNavigation, { type AppTab } from './components/AppNavigation.vue'
@@ -125,7 +127,30 @@ onMounted(() => {
 
   // Check for updates
   const versionStore = useVersionStore()
-  versionStore.initialize()
+  const toast = useToastStore()
+  versionStore.initialize().finally(() => {
+    // Surface a one-per-day update prompt for logged-in users who are not on
+    // the Home tab (Home already has a persistent banner).
+    if (!versionStore.hasUpdate) return
+    const lastPrompt = localStorage.getItem('dqh.updatePromptAt')
+    const now = Date.now()
+    if (lastPrompt && now - Number(lastPrompt) < 24 * 60 * 60 * 1000) return
+    localStorage.setItem('dqh.updatePromptAt', String(now))
+    toast.info({
+      title: t('app.update_available', { version: versionStore.latestRelease?.tag_name ?? '' }),
+      description: t('app.update_available_desc'),
+      duration: 10_000,
+      actions: [
+        {
+          label: t('app.update_open'),
+          onClick: () => {
+            const url = versionStore.latestRelease?.html_url
+            if (url) void open(url)
+          },
+        },
+      ],
+    })
+  })
 
   // Listen for tab navigation events from toast actions
   window.addEventListener('app:navigate', handleAppNavigate)

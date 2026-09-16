@@ -307,7 +307,11 @@
     "cdp_dialog_title_disconnected_vesktop": "要重新啟動 Vesktop 以啟用 CDP 嗎？",
     "cdp_dialog_desc_disconnected_vesktop": "Vesktop 正在執行但尚未連線到 CDP。我們需要啟用 CDP 偵錯連接埠後重新啟動 Vesktop。",
     "desktop_client": "桌面用戶端",
-    "desktop_client_desc": "當 Discord 與 Vesktop 都已安裝時，此選項只會影響 CDP 登入。本機 token 擷取一律使用官方 Discord 用戶端。"
+    "desktop_client_desc": "當 Discord 與 Vesktop 都已安裝時，此選項只會影響 CDP 登入。本機 token 擷取一律使用官方 Discord 用戶端。",
+    "cdp_relaunch_quick": "Relink Discord (CDP)",
+    "cdp_relaunch_quick_desc": "Discord CDP is not connected. Relaunch the currently selected client automatically to re-enable game quests.",
+    "cdp_relaunch_success": "Discord relaunched with CDP",
+    "cdp_relaunch_failed": "Failed to relaunch Discord with CDP: {error}"
   },
   "version": {
     "update_available": "發現新版本！",
@@ -369,7 +373,8 @@
     "select_desc": "發現多個有效的 Discord Token，請選擇要使用的帳號：",
     "add_account": "新增帳號",
     "add_account_desc": "無需登出即可新增另一個帳號，方便隨時切換。",
-    "added_account": "已切換到 {name}"
+    "added_account": "已切換到 {name}",
+    "run_all": "Run all accounts"
   },
   "dialog": {
     "accept_quests_title": "接受任務",
@@ -507,5 +512,29 @@
     "close_only": "僅關閉本應用程式",
     "restore_and_close": "關閉本應用程式並將 Discord 重新啟動至一般模式",
     "helper_error": "無法啟動 Discord 重新啟動助手。你可能需要手動完全結束並重新開啟 Discord。"
+  },
+  "app": {
+    "update_available": "Discord Quest Helper {version} is available",
+    "update_available_desc": "A new version is ready to download.",
+    "update_open": "View update"
+  },
+  "batch": {
+    "running": "Running quests for all accounts",
+    "current_account": "Running: {name}",
+    "progress": "{current} of {total}",
+    "cancel": "Stop batch",
+    "done_title": "Batch complete",
+    "status_success": "done",
+    "status_failed": "failed",
+    "status_paused": "paused",
+    "status_skipped": "nothing to run",
+    "status_cancelled": "cancelled",
+    "login_failed": "Failed to log in to this account",
+    "no_accounts": "No saved accounts to run. Add an account first.",
+    "finished": "Batch finished: {success} succeeded",
+    "finished_partial": "Batch finished: {success} succeeded, {failed} failed, {skipped} skipped",
+    "finished_paused": "Batch finished: {success} succeeded, {paused} paused, {failed} failed, {skipped} skipped",
+    "notify_account_done": "{name}: {status}",
+    "notify_done": "Batch done: {success} ok, {failed} failed, {skipped} skipped"
   }
 }

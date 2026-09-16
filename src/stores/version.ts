@@ -75,8 +75,8 @@ export const useVersionStore = defineStore('version', () => {
 
         try {
             const url = checkPreRelease.value
-              ? 'https://api.github.com/repos/Masterain98/discord-quest-helper/releases'
-              : 'https://api.github.com/repos/Masterain98/discord-quest-helper/releases/latest'
+              ? 'https://api.github.com/repos/36go/discord-project/releases'
+              : 'https://api.github.com/repos/36go/discord-project/releases/latest'
 
             const res = await fetch(url, {
                 headers: {

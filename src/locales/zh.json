@@ -307,7 +307,11 @@
     "debug_already_unlocked": "已开启开发者模式",
     "disable_developer_mode": "关闭开发者模式",
     "disable_debug_confirm_title": "确认关闭开发者模式？",
-    "disable_debug_confirm_desc": "Debug 标签页和开发者工具将被隐藏。你可以通过连续点击版本号 7 次重新启用。"
+    "disable_debug_confirm_desc": "Debug 标签页和开发者工具将被隐藏。你可以通过连续点击版本号 7 次重新启用。",
+    "cdp_relaunch_quick": "Relink Discord (CDP)",
+    "cdp_relaunch_quick_desc": "Discord CDP is not connected. Relaunch the currently selected client automatically to re-enable game quests.",
+    "cdp_relaunch_success": "Discord relaunched with CDP",
+    "cdp_relaunch_failed": "Failed to relaunch Discord with CDP: {error}"
   },
   "version": {
     "update_available": "发现新版本！",
@@ -369,7 +373,8 @@
     "select_desc": "发现了多个有效的 Discord Token，请选择要使用的账号：",
     "add_account": "添加账号",
     "add_account_desc": "无需退出登录即可添加另一个账号，方便随时切换。",
-    "added_account": "已切换到 {name}"
+    "added_account": "已切换到 {name}",
+    "run_all": "Run all accounts"
   },
   "dialog": {
     "accept_quests_title": "接受任务",
@@ -507,5 +512,29 @@
     "close_only": "仅关闭本应用",
     "restore_and_close": "关闭本应用并重启Discord到一般模式",
     "helper_error": "无法启动 Discord 重启助手。你可能需要手动完全退出并重新打开 Discord。"
+  },
+  "app": {
+    "update_available": "Discord Quest Helper {version} is available",
+    "update_available_desc": "A new version is ready to download.",
+    "update_open": "View update"
+  },
+  "batch": {
+    "running": "Running quests for all accounts",
+    "current_account": "Running: {name}",
+    "progress": "{current} of {total}",
+    "cancel": "Stop batch",
+    "done_title": "Batch complete",
+    "status_success": "done",
+    "status_failed": "failed",
+    "status_paused": "paused",
+    "status_skipped": "nothing to run",
+    "status_cancelled": "cancelled",
+    "login_failed": "Failed to log in to this account",
+    "no_accounts": "No saved accounts to run. Add an account first.",
+    "finished": "Batch finished: {success} succeeded",
+    "finished_partial": "Batch finished: {success} succeeded, {failed} failed, {skipped} skipped",
+    "finished_paused": "Batch finished: {success} succeeded, {paused} paused, {failed} failed, {skipped} skipped",
+    "notify_account_done": "{name}: {status}",
+    "notify_done": "Batch done: {success} ok, {failed} failed, {skipped} skipped"
   }
 }

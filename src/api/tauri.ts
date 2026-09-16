@@ -213,6 +213,15 @@ export async function setToken(token: string, onProgress?: AuthProgressHandler):
   return await invoke('set_token', { token, onProgress: createAuthProgressChannel(onProgress) })
 }
 
+// Token protection (DPAPI on Windows)
+export async function dpapiEncrypt(input: string): Promise<string> {
+  return await invoke('dpapi_encrypt', { input })
+}
+
+export async function dpapiDecrypt(input: string): Promise<string> {
+  return await invoke('dpapi_decrypt', { input })
+}
+
 // RPC commands
 export function connectToDiscordRpc(activityJson: string, action: string = 'connect'): Promise<void> {
   return invoke('connect_to_discord_rpc', { activity_json: activityJson, action })

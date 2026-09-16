@@ -22,6 +22,80 @@
       </Button>
     </div>
 
+    <!-- Quick CDP relink banner -->
+    <div
+      v-if="authStore.user && !questsStore.cdpAvailable && !batchStore.isRunning"
+      class="mb-6 p-4 border border-border/60 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-card/60"
+    >
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-10 h-10 rounded-full bg-muted flex items-center justify-center shrink-0">
+          <RefreshCw class="w-5 h-5 text-muted-foreground" :class="relinkingCdp && 'animate-spin'" />
+        </div>
+        <div class="min-w-0">
+          <p class="font-semibold">{{ t('settings.cdp_relaunch_quick') }}</p>
+          <p class="text-sm text-muted-foreground">{{ t('settings.cdp_relaunch_quick_desc') }}</p>
+        </div>
+      </div>
+      <Button variant="outline" class="gap-2 shrink-0" :disabled="relinkingCdp" @click="relinkDiscordCdp">
+        <Loader2 v-if="relinkingCdp" class="w-4 h-4 animate-spin" />
+        <RefreshCw v-else class="w-4 h-4" />
+        {{ t('settings.cdp_relaunch_quick') }}
+      </Button>
+    </div>
+
+    <!-- Batch run all accounts progress -->
+    <div
+      v-if="batchStore.isRunning || batchStore.results.length > 0"
+      class="mb-6 p-4 border border-border/60 rounded-lg bg-card/60"
+    >
+      <template v-if="batchStore.isRunning">
+        <div class="flex items-center justify-between gap-3">
+          <div class="min-w-0">
+            <p class="font-semibold flex items-center gap-2">
+              <Play class="w-4 h-4 text-primary" />
+              {{ t('batch.running') }}
+            </p>
+            <p class="text-sm text-muted-foreground truncate">
+              {{ t('batch.current_account', { name: batchStore.currentAccountName }) }}
+              &middot;
+              {{ t('batch.progress', { current: batchStore.currentIndex, total: batchStore.totalAccounts }) }}
+            </p>
+          </div>
+          <Button variant="ghost" size="sm" class="gap-2 shrink-0 text-destructive" @click="batchStore.cancelBatch()">
+            <Square class="w-4 h-4" />
+            {{ t('batch.cancel') }}
+          </Button>
+        </div>
+        <div class="mt-3 h-2 w-full rounded-full bg-muted overflow-hidden">
+          <div class="h-full bg-primary transition-all" :style="{ width: batchStore.progress + '%' }" />
+        </div>
+      </template>
+      <template v-else>
+        <div class="flex items-center justify-between gap-3">
+          <p class="font-semibold">{{ t('batch.done_title') }}</p>
+          <p class="text-sm text-muted-foreground shrink-0">
+            {{ t('batch.progress', { current: batchStore.results.length, total: batchStore.totalAccounts }) }}
+          </p>
+        </div>
+        <div class="mt-2 flex flex-wrap gap-1.5">
+          <span
+            v-for="result in batchStore.results"
+            :key="result.userId"
+            class="inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs"
+            :class="{
+              'border-emerald-500/40 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400': result.status === 'success',
+              'border-red-500/40 bg-red-500/10 text-red-600 dark:text-red-400': result.status === 'failed',
+              'border-amber-500/40 bg-amber-500/10 text-amber-600 dark:text-amber-400': result.status === 'paused',
+              'border-muted-foreground/30 bg-muted/40 text-muted-foreground': result.status === 'skipped' || result.status === 'cancelled',
+            }"
+            :title="result.error"
+          >
+            {{ result.name }}
+          </span>
+        </div>
+      </template>
+    </div>
+
     <div class="space-y-6">
       <div class="space-y-6">
         <div class="flex min-w-0 items-center justify-between gap-4">
@@ -529,6 +603,7 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useQuestsStore } from '@/stores/quests'
 import { useVersionStore } from '@/stores/version'
+import { useBatchStore } from '@/stores/batchAccounts'
 import OrbsNitroStatus from '@/components/OrbsNitroStatus.vue'
 import QuestListHeader from '@/components/home/QuestListHeader.vue'
 import QuestViewTabs from '@/components/home/QuestViewTabs.vue'
@@ -539,6 +614,9 @@ import {
   acceptQuest as acceptQuestApi,
   claimQuestReward,
   navigateDiscordSpa,
+  getDesktopClientState,
+  launchDesktopClientCdp,
+  restartDiscordCdp,
 } from '@/api/tauri'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
@@ -561,7 +639,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { cn } from '@/lib/utils'
-import { ArrowUpCircle, ExternalLink, Gift, Loader2 } from 'lucide-vue-next'
+import { ArrowUpCircle, ExternalLink, Gift, Loader2, Play, RefreshCw, Square } from 'lucide-vue-next'
 import { Input } from '@/components/ui/input'
 import { useI18n } from 'vue-i18n'
 import { open } from '@tauri-apps/plugin-shell'
@@ -594,6 +672,30 @@ const authStore = useAuthStore()
 const questsStore = useQuestsStore()
 const versionStore = useVersionStore()
 const toast = useToastStore()
+const batchStore = useBatchStore()
+
+const relinkingCdp = ref(false)
+
+async function relinkDiscordCdp() {
+  if (relinkingCdp.value) return
+  relinkingCdp.value = true
+  try {
+    try {
+      const state = await getDesktopClientState(questsStore.cdpPort)
+      await launchDesktopClientCdp(questsStore.cdpPort, state.selection, true)
+    } catch {
+      await restartDiscordCdp(questsStore.cdpPort)
+    }
+    await questsStore.initCdpMode()
+    toast.success({ title: t('settings.cdp_relaunch_success') })
+  } catch (e) {
+    toast.error({
+      title: t('settings.cdp_relaunch_failed', { error: e instanceof Error ? e.message : String(e) }),
+    })
+  } finally {
+    relinkingCdp.value = false
+  }
+}
 
 // Executables the process simulator can launch on this host — the same rule the
 // Game Simulator view and quests.ts's resolveSimulationExecutable apply (Linux:

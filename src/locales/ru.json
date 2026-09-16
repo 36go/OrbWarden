@@ -307,7 +307,11 @@
     "cdp_dialog_title_disconnected_vesktop": "Перезапустить Vesktop для включения CDP?",
     "cdp_dialog_desc_disconnected_vesktop": "Vesktop запущен, но не подключён к CDP. Необходимо перезапустить Vesktop с включённым отладочным портом CDP.",
     "desktop_client": "Настольный клиент",
-    "desktop_client_desc": "Если установлены Discord и Vesktop, этот выбор влияет только на вход через CDP. Локальное извлечение токенов всегда использует официальный клиент Discord."
+    "desktop_client_desc": "Если установлены Discord и Vesktop, этот выбор влияет только на вход через CDP. Локальное извлечение токенов всегда использует официальный клиент Discord.",
+    "cdp_relaunch_quick": "Relink Discord (CDP)",
+    "cdp_relaunch_quick_desc": "Discord CDP is not connected. Relaunch the currently selected client automatically to re-enable game quests.",
+    "cdp_relaunch_success": "Discord relaunched with CDP",
+    "cdp_relaunch_failed": "Failed to relaunch Discord with CDP: {error}"
   },
   "version": {
     "update_available": "Доступна новая версия!",
@@ -369,7 +373,8 @@
     "select_desc": "Найдено несколько действительных Discord токенов. Выберите аккаунт:",
     "add_account": "Добавить аккаунт",
     "add_account_desc": "Добавьте другой аккаунт, чтобы переключаться между ними без выхода.",
-    "added_account": "Переключено на {name}"
+    "added_account": "Переключено на {name}",
+    "run_all": "Run all accounts"
   },
   "dialog": {
     "accept_quests_title": "Принять квесты",
@@ -507,5 +512,29 @@
     "close_only": "Закрыть только приложение",
     "restore_and_close": "Закрыть и перезапустить Discord в обычном режиме",
     "helper_error": "Не удалось запустить помощник перезапуска Discord. Полностью закройте и снова откройте Discord вручную."
+  },
+  "app": {
+    "update_available": "Discord Quest Helper {version} is available",
+    "update_available_desc": "A new version is ready to download.",
+    "update_open": "View update"
+  },
+  "batch": {
+    "running": "Running quests for all accounts",
+    "current_account": "Running: {name}",
+    "progress": "{current} of {total}",
+    "cancel": "Stop batch",
+    "done_title": "Batch complete",
+    "status_success": "done",
+    "status_failed": "failed",
+    "status_paused": "paused",
+    "status_skipped": "nothing to run",
+    "status_cancelled": "cancelled",
+    "login_failed": "Failed to log in to this account",
+    "no_accounts": "No saved accounts to run. Add an account first.",
+    "finished": "Batch finished: {success} succeeded",
+    "finished_partial": "Batch finished: {success} succeeded, {failed} failed, {skipped} skipped",
+    "finished_paused": "Batch finished: {success} succeeded, {paused} paused, {failed} failed, {skipped} skipped",
+    "notify_account_done": "{name}: {status}",
+    "notify_done": "Batch done: {success} ok, {failed} failed, {skipped} skipped"
   }
 }

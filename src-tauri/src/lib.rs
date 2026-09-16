@@ -7,6 +7,7 @@ mod cdp_quest;
 mod discord_api;
 mod discord_cdp_commands;
 mod discord_gateway;
+mod dpapi;
 mod game_simulator;
 mod logger;
 mod models;
@@ -1849,6 +1850,7 @@ pub fn run() {
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_notification::init())
         .manage(AppState {
             client: Mutex::new(None),
             authenticated_user: Mutex::new(None),
@@ -1893,6 +1895,8 @@ pub fn run() {
             auto_detect_token,
             set_token,
             auto_login_via_cdp,
+            dpapi::dpapi_encrypt,
+            dpapi::dpapi_decrypt,
             get_quests,
             get_quests_full,
             start_video_quest,

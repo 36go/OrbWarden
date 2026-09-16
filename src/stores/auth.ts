@@ -1,7 +1,7 @@
 ﻿import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { DiscordUser, ExtractedAccount, ProgramReward, AuthProgress, AuthProgressHandler } from '@/api/tauri'
-import { autoDetectToken, setToken, autoLoginViaCdp, autoFetchSuperProperties, getProgramRewards } from '@/api/tauri'
+import { autoDetectToken, setToken, autoLoginViaCdp, autoFetchSuperProperties, getProgramRewards, dpapiEncrypt, dpapiDecrypt } from '@/api/tauri'
 import { useQuestsStore } from './quests'
 import { useI18n } from 'vue-i18n'
 import { useNow } from '@vueuse/core'
@@ -13,6 +13,8 @@ export interface SavedAccount {
   token: string
   user: DiscordUser
   savedAt: number
+  /** True when token is wrapped with the platform protector (DPAPI on Windows). */
+  encrypted?: boolean
 }
 
 function loadSavedAccounts(): SavedAccount[] {
@@ -26,6 +28,23 @@ function loadSavedAccounts(): SavedAccount[] {
   }
 }
 
+async function protectToken(tokenValue: string): Promise<{ token: string; encrypted: boolean }> {
+  try {
+    return { token: await dpapiEncrypt(tokenValue), encrypted: true }
+  } catch {
+    return { token: tokenValue, encrypted: false }
+  }
+}
+
+async function restoreToken(saved: SavedAccount): Promise<string> {
+  if (!saved.encrypted) return saved.token
+  try {
+    return await dpapiDecrypt(saved.token)
+  } catch {
+    return saved.token
+  }
+}
+
 export const useAuthStore = defineStore('auth', () => {
   const { t } = useI18n()
   const user = ref<DiscordUser | null>(null)
@@ -34,6 +53,25 @@ export const useAuthStore = defineStore('auth', () => {
   const error = ref<string | null>(null)
   const detectedAccounts = ref<ExtractedAccount[]>([])
   const savedAccounts = ref<SavedAccount[]>(loadSavedAccounts())
+
+  // One-time migration: wrap any legacy in-plaintext tokens with DPAPI. Runs in
+  // the background so startup is never blocked, and is a no-op when encryption
+  // is unavailable.
+  async function upgradeSavedAccountsInBackground() {
+    if (savedAccounts.value.some(saved => saved.encrypted)) return
+    let changed = false
+    for (const saved of savedAccounts.value) {
+      if (saved.encrypted) continue
+      const encryptedToken = await protectToken(saved.token)
+      if (encryptedToken.encrypted) {
+        saved.token = encryptedToken.token
+        saved.encrypted = true
+        changed = true
+      }
+    }
+    if (changed) persistSavedAccounts()
+  }
+  upgradeSavedAccountsInBackground()
 
   function persistSavedAccounts() {
     try {
@@ -47,12 +85,14 @@ export const useAuthStore = defineStore('auth', () => {
     return savedAccounts.value.find(saved => saved.user.id === userId) ?? null
   }
 
-  function saveAccount(userId: string, tokenValue: string, savedUser: DiscordUser) {
+  async function saveAccount(userId: string, tokenValue: string, savedUser: DiscordUser) {
     const existing = savedAccountForUser(userId)
+    const encryptedToken = await protectToken(tokenValue)
     const entry: SavedAccount = {
-      token: tokenValue,
+      token: encryptedToken.token,
       user: savedUser,
       savedAt: existing?.savedAt ?? Date.now(),
+      encrypted: encryptedToken.encrypted,
     }
     const index = savedAccounts.value.findIndex(saved => saved.user.id === userId)
     if (index >= 0) {
@@ -71,7 +111,7 @@ export const useAuthStore = defineStore('auth', () => {
   async function switchToSavedAccount(userId: string, onProgress?: AuthProgressHandler): Promise<boolean> {
     const saved = savedAccountForUser(userId)
     if (!saved) return false
-    return await loginWithToken(saved.token, onProgress)
+    return await loginWithToken(await restoreToken(saved), onProgress)
   }
 
   // Discord's Program Rewards endpoint owns the monthly Orbs schedule.
@@ -135,7 +175,7 @@ export const useAuthStore = defineStore('auth', () => {
       })
       token.value = tokenValue
       if (user.value) {
-        saveAccount(user.value.id, tokenValue, user.value)
+        await saveAccount(user.value.id, tokenValue, user.value)
       }
 
       // The backend already primed the request identity inside set_token

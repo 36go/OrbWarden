@@ -307,7 +307,11 @@
     "debug_already_unlocked": "Developer mode enabled",
     "disable_developer_mode": "Disable Developer Mode",
     "disable_debug_confirm_title": "Disable Developer Mode?",
-    "disable_debug_confirm_desc": "The Debug tab and developer tools will be hidden. You can re-enable it by tapping the version number 7 times."
+    "disable_debug_confirm_desc": "The Debug tab and developer tools will be hidden. You can re-enable it by tapping the version number 7 times.",
+    "cdp_relaunch_quick": "Relink Discord (CDP)",
+    "cdp_relaunch_quick_desc": "Discord CDP is not connected. Relaunch the currently selected client automatically to re-enable game quests.",
+    "cdp_relaunch_success": "Discord relaunched with CDP",
+    "cdp_relaunch_failed": "Failed to relaunch Discord with CDP: {error}"
   },
   "version": {
     "update_available": "A new version is available!",
@@ -376,7 +380,8 @@
     "current_account": "Current",
     "add_account": "Add account",
     "add_account_desc": "Add another account to switch between accounts without logging out.",
-    "added_account": "Switched to {name}"
+    "added_account": "Switched to {name}",
+    "run_all": "Run all accounts"
   },
   "dialog": {
     "accept_quests_title": "Accept Quests",
@@ -514,5 +519,29 @@
     "close_only": "Close this app only",
     "restore_and_close": "Close app and restart Discord normally",
     "helper_error": "The Discord restart helper could not be started. You may need to fully quit and reopen Discord manually."
+  },
+  "app": {
+    "update_available": "Discord Quest Helper {version} is available",
+    "update_available_desc": "A new version is ready to download.",
+    "update_open": "View update"
+  },
+  "batch": {
+    "running": "Running quests for all accounts",
+    "current_account": "Running: {name}",
+    "progress": "{current} of {total}",
+    "cancel": "Stop batch",
+    "done_title": "Batch complete",
+    "status_success": "done",
+    "status_failed": "failed",
+    "status_paused": "paused",
+    "status_skipped": "nothing to run",
+    "status_cancelled": "cancelled",
+    "login_failed": "Failed to log in to this account",
+    "no_accounts": "No saved accounts to run. Add an account first.",
+    "finished": "Batch finished: {success} succeeded",
+    "finished_partial": "Batch finished: {success} succeeded, {failed} failed, {skipped} skipped",
+    "finished_paused": "Batch finished: {success} succeeded, {paused} paused, {failed} failed, {skipped} skipped",
+    "notify_account_done": "{name}: {status}",
+    "notify_done": "Batch done: {success} ok, {failed} failed, {skipped} skipped"
   }
 }

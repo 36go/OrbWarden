@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
+import { useBatchStore } from '@/stores/batchAccounts'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { ChevronDown, LogOut, Trash2, ArrowLeftRight, UserPlus } from 'lucide-vue-next'
+import { ChevronDown, LogOut, Trash2, ArrowLeftRight, UserPlus, Play, Square } from 'lucide-vue-next'
 import { useI18n } from 'vue-i18n'
 import AddAccountDialog from '@/components/auth/AddAccountDialog.vue'
 
 const { t } = useI18n()
 const authStore = useAuthStore()
+const batchStore = useBatchStore()
 const emit = defineEmits<{ logout: [] }>()
 
 const user = computed(() => authStore.user)
@@ -60,6 +62,15 @@ function handleRemove(userId: string) {
 function handleAddAccount() {
   open.value = false
   addAccountOpen.value = true
+}
+
+function handleRunAll() {
+  open.value = false
+  batchStore.startBatch()
+}
+
+function handleStopBatch() {
+  batchStore.cancelBatch()
 }
 
 onMounted(() => document.addEventListener('mousedown', handleClickOutside))
@@ -159,6 +170,30 @@ onUnmounted(() => document.removeEventListener('mousedown', handleClickOutside))
         </div>
 
         <div class="h-px bg-border mx-2 my-1" />
+
+        <!-- Run all accounts (batch) -->
+        <div v-if="authStore.savedAccounts.length > 0">
+          <button
+            class="w-full px-3 py-2 text-left text-sm hover:bg-muted/60 transition-colors inline-flex items-center gap-2"
+            :disabled="batchStore.isRunning"
+            @click="handleRunAll"
+          >
+            <Play class="w-4 h-4" :class="batchStore.isRunning && 'animate-pulse text-primary'" />
+            <span class="flex-1">{{ t('account.run_all') }}</span>
+            <span v-if="batchStore.isRunning" class="text-xs text-muted-foreground">
+              {{ batchStore.currentIndex }}/{{ batchStore.totalAccounts }}
+            </span>
+          </button>
+          <div v-if="batchStore.isRunning" class="px-3 pb-2 text-xs text-muted-foreground">
+            <div class="flex items-center justify-between gap-2">
+              <span class="truncate">{{ t('batch.current_account', { name: batchStore.currentAccountName }) }}</span>
+              <button class="shrink-0 inline-flex items-center gap-1 text-destructive hover:underline" @click="handleStopBatch">
+                <Square class="w-3 h-3" />
+                {{ t('batch.cancel') }}
+              </button>
+            </div>
+          </div>
+        </div>
 
         <!-- Add account -->
         <button

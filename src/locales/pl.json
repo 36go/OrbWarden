@@ -307,7 +307,11 @@
     "cdp_dialog_title_disconnected_vesktop": "Uruchomić ponownie Vesktop, aby włączyć CDP?",
     "cdp_dialog_desc_disconnected_vesktop": "Vesktop jest uruchomiony, ale nie jest połączony z CDP. Należy uruchomić Vesktop ponownie z włączonym portem debugowania CDP.",
     "desktop_client": "Klient desktopowy",
-    "desktop_client_desc": "Gdy Discord i Vesktop są zainstalowane, ten wybór dotyczy tylko logowania CDP. Lokalna ekstrakcja tokenów zawsze używa oficjalnego klienta Discord."
+    "desktop_client_desc": "Gdy Discord i Vesktop są zainstalowane, ten wybór dotyczy tylko logowania CDP. Lokalna ekstrakcja tokenów zawsze używa oficjalnego klienta Discord.",
+    "cdp_relaunch_quick": "Relink Discord (CDP)",
+    "cdp_relaunch_quick_desc": "Discord CDP is not connected. Relaunch the currently selected client automatically to re-enable game quests.",
+    "cdp_relaunch_success": "Discord relaunched with CDP",
+    "cdp_relaunch_failed": "Failed to relaunch Discord with CDP: {error}"
   },
   "version": {
     "update_available": "Dostępna jest nowa wersja!",
@@ -369,7 +373,8 @@
     "select_desc": "Znaleziono wiele ważnych tokenów Discord. Wybierz konto, którego chcesz użyć:",
     "add_account": "Dodaj konto",
     "add_account_desc": "Dodaj kolejne konto, aby przełączać się bez wylogowywania.",
-    "added_account": "Przełączono na {name}"
+    "added_account": "Przełączono na {name}",
+    "run_all": "Run all accounts"
   },
   "dialog": {
     "accept_quests_title": "Zaakceptuj Quests",
@@ -507,5 +512,29 @@
     "close_only": "Zamknij tylko tę aplikację",
     "restore_and_close": "Zamknij i uruchom Discord normalnie",
     "helper_error": "Nie udało się uruchomić pomocnika ponownego uruchamiania Discord. Zamknij Discord całkowicie i otwórz go ręcznie."
+  },
+  "app": {
+    "update_available": "Discord Quest Helper {version} is available",
+    "update_available_desc": "A new version is ready to download.",
+    "update_open": "View update"
+  },
+  "batch": {
+    "running": "Running quests for all accounts",
+    "current_account": "Running: {name}",
+    "progress": "{current} of {total}",
+    "cancel": "Stop batch",
+    "done_title": "Batch complete",
+    "status_success": "done",
+    "status_failed": "failed",
+    "status_paused": "paused",
+    "status_skipped": "nothing to run",
+    "status_cancelled": "cancelled",
+    "login_failed": "Failed to log in to this account",
+    "no_accounts": "No saved accounts to run. Add an account first.",
+    "finished": "Batch finished: {success} succeeded",
+    "finished_partial": "Batch finished: {success} succeeded, {failed} failed, {skipped} skipped",
+    "finished_paused": "Batch finished: {success} succeeded, {paused} paused, {failed} failed, {skipped} skipped",
+    "notify_account_done": "{name}: {status}",
+    "notify_done": "Batch done: {success} ok, {failed} failed, {skipped} skipped"
   }
 }

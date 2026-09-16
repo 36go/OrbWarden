@@ -8,6 +8,8 @@ const mocks = vi.hoisted(() => ({
   setToken: vi.fn(),
   autoFetchSuperProperties: vi.fn(),
   getProgramRewards: vi.fn(),
+  dpapiEncrypt: vi.fn(async (input: string) => input),
+  dpapiDecrypt: vi.fn(async (input: string) => input),
   questsStore: {
     cdpPort: 9223,
     cdpAvailable: false,
@@ -26,6 +28,8 @@ vi.mock('@/api/tauri', () => ({
   setToken: mocks.setToken,
   autoFetchSuperProperties: mocks.autoFetchSuperProperties,
   getProgramRewards: mocks.getProgramRewards,
+  dpapiEncrypt: mocks.dpapiEncrypt,
+  dpapiDecrypt: mocks.dpapiDecrypt,
 }))
 
 vi.mock('./quests', () => ({
