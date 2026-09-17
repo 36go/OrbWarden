@@ -1,8 +1,8 @@
 {
   "general": {
-    "title": "Discord Quest Helper",
+    "title": "OrbWarden",
     "subtitle": "Dasbor untuk mengelola Discord Quests Anda",
-    "welcome": "Selamat datang di Discord Quest Helper",
+    "welcome": "Selamat datang di OrbWarden",
     "login_prompt": "Masuk dengan akun Discord Anda untuk mulai mengelola misi Anda.",
     "theme": {},
     "logout": "Keluar",
@@ -514,7 +514,7 @@
     "helper_error": "Pembantu mulai ulang Discord tidak dapat dijalankan. Tutup Discord sepenuhnya lalu buka kembali secara manual."
   },
   "app": {
-    "update_available": "Discord Quest Helper {version} is available",
+    "update_available": "OrbWarden {version} is available",
     "update_available_desc": "A new version is ready to download.",
     "update_open": "View update"
   },

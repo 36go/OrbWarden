@@ -140,7 +140,7 @@ function removeBubble(id: number) {
             @click="handleVersionTapWithBubble"
             title="Version Info"
           >
-            Discord Quest Helper v{{ versionStore.currentVersion }}
+            OrbWarden v{{ versionStore.currentVersion }}
             <img
               v-for="bubble in logoBubbles"
               :key="bubble.id"

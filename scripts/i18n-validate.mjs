@@ -169,7 +169,7 @@ function main() {
         locale.locale !== SOURCE_LOCALE
         && value === enValue
         && value.length > 18
-        && !/^(Discord|CDP|API|RPC|Token|X-Super-Properties|x-super-properties|Tauri|Vue 3|TailwindCSS|vue-i18n|shadcn-vue)/.test(value)
+        && !/^(Discord|OrbWarden|CDP|API|RPC|Token|X-Super-Properties|x-super-properties|Tauri|Vue 3|TailwindCSS|vue-i18n|shadcn-vue)/.test(value)
       ) {
         warnings.push({
           locale: locale.locale,

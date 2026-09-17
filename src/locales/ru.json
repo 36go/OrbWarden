@@ -1,8 +1,8 @@
 {
   "general": {
-    "title": "Discord Quest Helper",
+    "title": "OrbWarden",
     "subtitle": "Панель управления вашими Discord Квестами",
-    "welcome": "Добро пожаловать в Discord Quest Helper",
+    "welcome": "Добро пожаловать в OrbWarden",
     "login_prompt": "Войдите в свой Discord аккаунт, чтобы начать управлять квестами.",
     "theme": {},
     "logout": "Выйти",
@@ -514,7 +514,7 @@
     "helper_error": "Не удалось запустить помощник перезапуска Discord. Полностью закройте и снова откройте Discord вручную."
   },
   "app": {
-    "update_available": "Discord Quest Helper {version} is available",
+    "update_available": "OrbWarden {version} is available",
     "update_available_desc": "A new version is ready to download.",
     "update_open": "View update"
   },

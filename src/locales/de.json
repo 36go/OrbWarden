@@ -1,8 +1,8 @@
 {
   "general": {
-    "title": "Discord Quest Helper",
+    "title": "OrbWarden",
     "subtitle": "Dashboard zur Verwaltung deiner Discord-Quests",
-    "welcome": "Willkommen bei Discord Quest Helper",
+    "welcome": "Willkommen bei OrbWarden",
     "login_prompt": "Melden Sie sich mit Ihrem Discord-Konto an, um mit der Verwaltung Ihrer Quests zu beginnen.",
     "theme": {},
     "logout": "Abmelden",
@@ -514,7 +514,7 @@
     "helper_error": "Der Discord-Neustarthelfer konnte nicht gestartet werden. Beende Discord vollständig und öffne es manuell erneut."
   },
   "app": {
-    "update_available": "Discord Quest Helper {version} is available",
+    "update_available": "OrbWarden {version} is available",
     "update_available_desc": "A new version is ready to download.",
     "update_open": "View update"
   },

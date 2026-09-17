@@ -1,8 +1,8 @@
 {
   "general": {
-    "title": "Discord Quest Helper",
+    "title": "OrbWarden",
     "subtitle": "แดชบอร์ดสำหรับจัดการ Discord Quests ของคุณ",
-    "welcome": "ยินดีต้อนรับสู่ Discord Quest Helper",
+    "welcome": "ยินดีต้อนรับสู่ OrbWarden",
     "login_prompt": "เข้าสู่ระบบด้วยบัญชี Discord ของคุณเพื่อเริ่มจัดการภารกิจของคุณ",
     "theme": {},
     "logout": "ออกจากระบบ",
@@ -514,7 +514,7 @@
     "helper_error": "ไม่สามารถเริ่มตัวช่วยรีสตาร์ต Discord ได้ โปรดปิด Discord ให้สมบูรณ์แล้วเปิดใหม่ด้วยตนเอง"
   },
   "app": {
-    "update_available": "Discord Quest Helper {version} is available",
+    "update_available": "OrbWarden {version} is available",
     "update_available_desc": "A new version is ready to download.",
     "update_open": "View update"
   },

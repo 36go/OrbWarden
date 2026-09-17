@@ -302,7 +302,7 @@ fn fingerprint_audit(raw: Option<String>) -> FingerprintAudit {
 fn platform_details() -> Value {
     let argv0 = std::env::args_os().next().map(PathBuf::from);
     let proc_exe = fs::read_link("/proc/self/exe").ok();
-    let desktop_id = "com.masterain.discord-quest-helper.desktop";
+    let desktop_id = "com.orbwarden.app.desktop";
     let desktop_installed = runtime_data_root()
         .is_some_and(|root| root.join("applications").join(desktop_id).is_file())
         || Path::new("/usr/share/applications")

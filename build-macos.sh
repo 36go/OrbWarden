@@ -1,5 +1,5 @@
 #!/bin/bash
-# Discord Quest Helper - macOS Build Script
+# OrbWarden - macOS Build Script
 # This script builds and packages the application for macOS
 
 set -Eeuo pipefail
@@ -18,7 +18,7 @@ GRAY='\033[0;90m'
 NC='\033[0m' # No Color
 
 echo -e "${CYAN}========================================${NC}"
-echo -e "${CYAN}  Discord Quest Helper Build Script${NC}"
+echo -e "${CYAN}  OrbWarden Build Script${NC}"
 echo -e "${CYAN}  (macOS)${NC}"
 echo -e "${CYAN}========================================${NC}"
 echo ""
@@ -131,11 +131,11 @@ if [ "$SKIP_TAURI_BUILD" = false ]; then
         --artifact "$APP_FILE" \
         --output "$RELEASE_DIR/identity-manifest.json"
 
-    SYMBOL_ARCHIVE="$RELEASE_DIR/discord-quest-helper-macos-symbols.zip"
+    SYMBOL_ARCHIVE="$RELEASE_DIR/orbwarden-macos-symbols.zip"
     symbol_paths=()
     while IFS= read -r path; do symbol_paths+=("$path"); done < <(
         find "$PROJECT_ROOT/target" -type d \
-            \( -name 'meridian*.dSYM' -o -name 'discord_quest_helper-*.dSYM' \
+            \( -name 'meridian*.dSYM' -o -name 'orbwarden-*.dSYM' \
                -o -name 'waybridge*.dSYM' -o -name 'stagecraft*.dSYM' \) \
             -prune
     )

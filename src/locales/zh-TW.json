@@ -1,8 +1,8 @@
 {
   "general": {
-    "title": "Discord Quest Helper",
+    "title": "OrbWarden",
     "subtitle": "Discord 任務管理儀表板",
-    "welcome": "歡迎使用 Discord Quest Helper",
+    "welcome": "歡迎使用 OrbWarden",
     "login_prompt": "使用 Discord 帳號登入以開始管理您的任務。",
     "theme": {},
     "logout": "登出",
@@ -514,7 +514,7 @@
     "helper_error": "無法啟動 Discord 重新啟動助手。你可能需要手動完全結束並重新開啟 Discord。"
   },
   "app": {
-    "update_available": "Discord Quest Helper {version} is available",
+    "update_available": "OrbWarden {version} is available",
     "update_available_desc": "A new version is ready to download.",
     "update_open": "View update"
   },

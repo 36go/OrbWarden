@@ -4,9 +4,9 @@
     "macosSigningEnabled": false
   },
   "identity": {
-    "publicName": "Discord Quest Helper",
-    "publicBinary": "discord-quest-helper",
-    "bundleIdentifier": "com.masterain.discord-quest-helper",
+    "publicName": "OrbWarden",
+    "publicBinary": "orbwarden",
+    "bundleIdentifier": "com.orbwarden.app",
     "mainBinary": "meridian",
     "bridgeBinary": "waybridge",
     "runnerBuildBinary": "stagecraft",

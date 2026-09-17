@@ -21,9 +21,13 @@ src-tauri/binaries/
 
 # Local release artifacts / downloaded archives
 dqh-0.10.4-portable.zip
-discord-quest-helper-app/
-discord-quest-helper.exe
+orbwarden-app/
+orbwarden.exe
+orbwarden-v*.zip
 discord-quest-helper-v*.zip
+
+# Generated validation reports
+reports/
 
 # Editor / OS
 .vscode/

@@ -1,8 +1,8 @@
 {
   "general": {
-    "title": "Discord Quest Helper",
+    "title": "OrbWarden",
     "subtitle": "Trang tổng quan để quản lý Discord Quests của bạn",
-    "welcome": "Chào mừng đến với Discord Quest Helper",
+    "welcome": "Chào mừng đến với OrbWarden",
     "login_prompt": "Đăng nhập bằng tài khoản Discord của bạn để bắt đầu quản lý nhiệm vụ của bạn.",
     "theme": {},
     "logout": "Đăng xuất",
@@ -514,7 +514,7 @@
     "helper_error": "Không thể khởi động trình trợ giúp khởi động lại Discord. Hãy thoát hoàn toàn Discord rồi mở lại theo cách thủ công."
   },
   "app": {
-    "update_available": "Discord Quest Helper {version} is available",
+    "update_available": "OrbWarden {version} is available",
     "update_available_desc": "A new version is ready to download.",
     "update_open": "View update"
   },

@@ -1,8 +1,8 @@
 {
   "general": {
-    "title": "Discord Quest Helper",
+    "title": "OrbWarden",
     "subtitle": "Discord Quests cihazınızı yönetmek için kontrol paneli",
-    "welcome": "Discord Quest Helper'a hoş geldiniz",
+    "welcome": "OrbWarden'a hoş geldiniz",
     "login_prompt": "Görevlerinizi yönetmeye başlamak için Discord hesabınızla giriş yapın.",
     "theme": {},
     "logout": "Oturumu kapat",
@@ -514,7 +514,7 @@
     "helper_error": "Discord yeniden başlatma yardımcısı başlatılamadı. Discord'u tamamen kapatıp elle yeniden açmanız gerekebilir."
   },
   "app": {
-    "update_available": "Discord Quest Helper {version} is available",
+    "update_available": "OrbWarden {version} is available",
     "update_available_desc": "A new version is ready to download.",
     "update_open": "View update"
   },

@@ -1,8 +1,8 @@
 {
   "general": {
-    "title": "Discord Quest Helper",
+    "title": "OrbWarden",
     "subtitle": "Discord 퀘스트 관리 대시보드",
-    "welcome": "Discord Quest Helper에 오신 것을 환영합니다",
+    "welcome": "OrbWarden에 오신 것을 환영합니다",
     "login_prompt": "Discord 계정으로 로그인하여 퀘스트 관리를 시작하세요.",
     "theme": {},
     "logout": "로그아웃",
@@ -514,7 +514,7 @@
     "helper_error": "Discord 재시작 도우미를 시작하지 못했습니다. Discord를 완전히 종료한 후 수동으로 다시 여세요."
   },
   "app": {
-    "update_available": "Discord Quest Helper {version} is available",
+    "update_available": "OrbWarden {version} is available",
     "update_available_desc": "A new version is ready to download.",
     "update_open": "View update"
   },

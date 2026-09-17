@@ -39,8 +39,8 @@ test('product names and random-looking hex names fail internal validation', () =
 });
 
 test('public identity remains allowed outside internal executable metadata', () => {
-  assert.equal(IDENTITY.publicName, 'Discord Quest Helper');
-  assert.equal(containsProductToken(IDENTITY.publicName), true);
+  assert.equal(IDENTITY.publicName, 'OrbWarden');
+  assert.equal(containsProductToken(IDENTITY.publicName), false);
 });
 
 test('Linux AppDir audit requires desktop integration with the neutral runtime', {
@@ -64,11 +64,11 @@ test('Linux AppDir audit requires desktop integration with the neutral runtime',
   Buffer.from('89504e470d0a1a0a', 'hex').copy(pngHeader);
   pngHeader.writeUInt32BE(64, 16);
   pngHeader.writeUInt32BE(64, 20);
-  writeFileSync(join(iconDir, 'com.masterain.discord-quest-helper.png'), pngHeader);
+  writeFileSync(join(iconDir, 'com.orbwarden.app.png'), pngHeader);
   writeFileSync(join(desktopDir, 'public.desktop'), `[Desktop Entry]
-Name=Discord Quest Helper
+Name=OrbWarden
 Exec=meridian
-Icon=com.masterain.discord-quest-helper
+Icon=com.orbwarden.app
 StartupWMClass=meridian
 Terminal=false
 Type=Application

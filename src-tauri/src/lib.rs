@@ -2501,7 +2501,7 @@ fn legacy_unix_cdp_launcher_path() -> Result<std::path::PathBuf, String> {
 }
 
 #[cfg(any(windows, test))]
-const WINDOWS_CDP_APP_CONFIG_DIR: &str = "com.masterain.discord-quest-helper";
+const WINDOWS_CDP_APP_CONFIG_DIR: &str = "com.orbwarden.app";
 #[cfg(any(windows, test))]
 const WINDOWS_CDP_RUNTIME_POINTER: &str = "cdp-runtime-exe.txt";
 #[cfg(any(windows, test))]
@@ -2632,7 +2632,7 @@ fn linux_xdg_data_home() -> Result<std::path::PathBuf, String> {
 fn linux_cdp_launcher_desktop_path() -> Result<std::path::PathBuf, String> {
     Ok(linux_xdg_data_home()?
         .join("applications")
-        .join("com.masterain.discord-quest-helper.cdp.desktop"))
+        .join("com.orbwarden.app.cdp.desktop"))
 }
 
 #[cfg(target_os = "linux")]
@@ -2805,7 +2805,7 @@ mod bundled_cdp_launcher_tests {
     #[test]
     fn locates_external_binary_next_to_packaged_main_executable() {
         for relative_main in [
-            "Discord Quest Helper.app/Contents/MacOS/meridian",
+            "OrbWarden.app/Contents/MacOS/meridian",
             "appimage-mount/usr/bin/meridian",
             "deb-root/usr/bin/meridian",
         ] {
@@ -2877,7 +2877,7 @@ mod bundled_cdp_launcher_tests {
 
 #[cfg(target_os = "windows")]
 fn add_windows_cdp_launcher_install_dirs(candidate_dirs: &mut Vec<std::path::PathBuf>) {
-    const PRODUCT_DIR: &str = "Discord Quest Helper";
+    const PRODUCT_DIR: &str = "OrbWarden";
 
     for var_name in ["ProgramFiles", "ProgramW6432", "ProgramFiles(x86)"] {
         if let Some(root) = std::env::var_os(var_name) {
@@ -3093,7 +3093,7 @@ $Shortcut = $WshShell.CreateShortcut($ShortcutPath)
 $Shortcut.TargetPath = '{launcher_path}'
 $Shortcut.Arguments = '{args}'
 $Shortcut.WorkingDirectory = '{launcher_dir}'
-$Shortcut.Description = 'Launch Discord with CDP enabled for Discord Quest Helper'
+$Shortcut.Description = 'Launch Discord with CDP enabled for OrbWarden'
 $Shortcut.IconLocation = '{launcher_path},0'
 $Shortcut.Save()
 [Console]::Out.WriteLine($ShortcutPath)
@@ -3219,7 +3219,7 @@ fn create_platform_cdp_launcher_shortcut(
     // alongside the .desktop entry so GNOME/KDE do not fall back to a generic
     // executable icon (especially in dev builds where the main app is not
     // installed system-wide).
-    const ICON_NAME: &str = "com.masterain.discord-quest-helper.cdp";
+    const ICON_NAME: &str = "com.orbwarden.app.cdp";
     const ICON_BYTES: &[u8] = include_bytes!("../../public/icons/launcher-logo.png");
     let icon_theme_dir = data_home.join("icons").join("hicolor");
     let icon_dir = icon_theme_dir.join("512x512").join("apps");
@@ -3272,7 +3272,7 @@ fn create_platform_cdp_launcher_shortcut(
     // Write to a temp file in the same directory, then atomically replace any
     // existing desktop entry. `rename` replaces the destination on Linux.
     let tmp_path = applications_dir.join(format!(
-        ".com.masterain.discord-quest-helper.cdp.desktop.{}.tmp",
+        ".com.orbwarden.app.cdp.desktop.{}.tmp",
         std::process::id()
     ));
     {
