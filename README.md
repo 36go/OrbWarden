@@ -9,10 +9,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/36go/discord-project/releases/tag/v1.1.1">
+  <a href="https://github.com/36go/OrbWarden/releases/tag/v1.1.1">
     <img src="https://img.shields.io/badge/version-1.1.1-blue" alt="Version" />
   </a>
-  <a href="https://github.com/36go/discord-project/blob/main/LICENSE">
+  <a href="https://github.com/36go/OrbWarden/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-green" alt="License" />
   </a>
   <img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey" alt="Platform" />
@@ -38,7 +38,7 @@ OrbWarden is a desktop app that automates Discord quest completion. It supports 
 
 ## Download
 
-Download the latest release from the [Releases page](https://github.com/36go/discord-project/releases/tag/v1.1.1):
+Download the latest release from the [Releases page](https://github.com/36go/OrbWarden/releases/tag/v1.1.1):
 
 | Platform | File | Notes |
 |----------|------|-------|
@@ -76,8 +76,8 @@ sudo dnf install -y webkit2gtk4.1-devel libappindicator-gtk3-devel librsvg2-deve
 ### Build
 
 ```bash
-git clone https://github.com/36go/discord-project.git
-cd discord-project
+git clone https://github.com/36go/OrbWarden.git
+cd OrbWarden
 pnpm install
 pnpm run tauri:build
 ```
@@ -89,8 +89,8 @@ Output:
 ### Windows Setup Script
 
 ```powershell
-git clone https://github.com/36go/discord-project.git
-cd discord-project
+git clone https://github.com/36go/OrbWarden.git
+cd OrbWarden
 powershell -ExecutionPolicy Bypass -File setup.ps1
 ```
 
@@ -147,4 +147,4 @@ Join our Discord server for support, updates, and discussion:
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request on [GitHub](https://github.com/36go/discord-project).
+Contributions are welcome! Please open an issue or submit a pull request on [GitHub](https://github.com/36go/OrbWarden).

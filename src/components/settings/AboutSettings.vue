@@ -174,13 +174,13 @@ function removeBubble(id: number) {
 
         <a
           href="#"
-          @click.prevent="openExternal('https://github.com/36go/discord-project')"
+          @click.prevent="openExternal('https://github.com/36go/OrbWarden')"
           class="flex items-center justify-between rounded-lg border bg-muted/30 px-3 py-2 transition-colors hover:bg-muted/60"
         >
           <span class="flex min-w-0 items-center gap-2">
             <img src="/icons/github-mark.svg" alt="GitHub" class="h-5 w-5 shrink-0 dark:hidden" />
             <img src="/icons/github-mark-white.svg" alt="GitHub" class="hidden h-5 w-5 shrink-0 dark:block" />
-            <span class="truncate text-primary">36go/discord-project</span>
+            <span class="truncate text-primary">36go/OrbWarden</span>
           </span>
           <ExternalLink class="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
         </a>
@@ -190,7 +190,7 @@ function removeBubble(id: number) {
             variant="outline"
             size="sm"
             :class="settingToneClass.info.buttonSoft"
-            @click="openExternal('https://github.com/36go/discord-project/issues/new')"
+            @click="openExternal('https://github.com/36go/OrbWarden/issues/new')"
           >
             {{ t('settings.feedback') }}
           </Button>
@@ -275,7 +275,7 @@ function removeBubble(id: number) {
               variant="outline"
               size="sm"
               :class="settingToneClass.info.buttonSoft"
-              @click="openExternal('https://github.com/36go/discord-project/releases')"
+              @click="openExternal('https://github.com/36go/OrbWarden/releases')"
             >
               View Releases
             </Button>
@@ -286,7 +286,7 @@ function removeBubble(id: number) {
             variant="outline"
             size="sm"
             :class="settingToneClass.info.buttonSoft"
-            @click="openExternal('https://github.com/36go/discord-project/issues/new')"
+            @click="openExternal('https://github.com/36go/OrbWarden/issues/new')"
           >
             {{ t('settings.feedback') }}
           </Button>
