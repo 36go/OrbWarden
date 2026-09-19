@@ -17,9 +17,6 @@
   </a>
   <img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=for-the-badge&logo=windows" alt="Platform" />
   <img src="https://img.shields.io/badge/Tauri-2.x-orange?style=for-the-badge&logo=tauri" alt="Tauri" />
-  <a href="https://discord.gg/se6VMAbjC">
-    <img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" />
-  </a>
 </p>
 
 ---
@@ -140,9 +137,9 @@ OrbWarden uses:
 
 ## 🔨 Community
 
-<a href="https://discord.gg/se6VMAbjC">
-  <img src="https://img.shields.io/badge/Join_Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Join our Discord" />
-</a>
+Join our Discord server for support, updates, and discussion:
+
+[![Discord](https://img.shields.io/badge/Join_Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/se6VMAbjC)
 
 ## License
 
@@ -151,3 +148,9 @@ OrbWarden uses:
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request on [GitHub](https://github.com/36go/OrbWarden).
+
+---
+
+<p align="center">
+  If you found OrbWarden useful, drop a ⭐ on the repo — it helps others find it!
+</p>
