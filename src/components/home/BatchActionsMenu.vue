@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Check, Gamepad2, ListChecks, MonitorPlay } from 'lucide-vue-next'
+import { Check, Gamepad2, Gift, ListChecks, MonitorPlay } from 'lucide-vue-next'
 import { useI18n } from 'vue-i18n'
 import { Button } from '@/components/ui/button'
 
@@ -8,14 +8,17 @@ const { t } = useI18n()
 
 const props = defineProps<{
   acceptCount: number
+  claimCount: number
   completeAllCount: number
   videoCount: number
   gameCount: number
   disabled?: boolean
+  claimAllDisabled?: boolean
 }>()
 
 const emit = defineEmits<{
   acceptAll: []
+  claimAll: []
   completeAll: []
   completeVideo: []
   completeGame: []
@@ -23,6 +26,7 @@ const emit = defineEmits<{
 
 const hasActions = computed(() =>
   props.acceptCount > 0 ||
+  props.claimCount > 0 ||
   props.completeAllCount > 0 ||
   props.videoCount > 0 ||
   props.gameCount > 0
@@ -47,6 +51,17 @@ const hasActions = computed(() =>
         <Check class="h-4 w-4" />
         {{ t('home.accept_all') }}
         <span class="tabular-nums opacity-70">{{ acceptCount }}</span>
+      </Button>
+      <Button
+        v-if="claimCount > 0"
+        size="sm"
+        class="shrink-0 gap-2 bg-green-600 hover:bg-green-700 text-white"
+        :disabled="claimAllDisabled"
+        @click="emit('claimAll')"
+      >
+        <Gift class="h-4 w-4" />
+        {{ t('home.claim_all') }}
+        <span class="tabular-nums opacity-80">{{ claimCount }}</span>
       </Button>
       <Button
         v-if="completeAllCount > 0"

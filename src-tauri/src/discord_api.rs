@@ -777,15 +777,12 @@ impl DiscordApiClient {
     pub async fn claim_quest_reward(
         &self,
         quest_id: &str,
-        platform: Option<String>,
     ) -> Result<serde_json::Value> {
         let url = format!("{}/quests/{}/claim-reward", DISCORD_API_BASE, quest_id);
-        let payload = match platform {
-            Some(platform) if !platform.trim().is_empty() => {
-                serde_json::json!({ "platform": platform })
-            }
-            _ => serde_json::json!({}),
-        };
+        let payload = serde_json::json!({
+            "platform": 4,
+            "location": 11,
+        });
 
         let response = self
             .request(Method::POST, &url)

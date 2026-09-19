@@ -121,12 +121,15 @@
           :refresh-disabled="questsStore.loading || !authStore.user || isBatchAccepting"
           :batch-disabled="isBatchAccepting || questsStore.isQueueRunning"
           :accept-count="unenrolledCount"
+          :claim-count="claimableCount"
           :complete-all-count="enrolledAllCount"
           :video-count="enrolledVideoCount"
           :game-count="enrolledGameCount"
+          :claim-all-disabled="claimingAll || questsStore.isQueueRunning"
           @toggle-filters="showFilters = !showFilters"
           @refresh="refreshQuests"
           @accept-all="handleAcceptAll"
+          @claim-all="claimAllRewards"
           @complete-all="handleCompleteAllTasks"
           @complete-video="handleCompleteAllVideo"
           @complete-game="handleCompleteAllGame"
@@ -1053,6 +1056,10 @@ const enrolledAllCount = computed(() => {
 
 const isBatchAccepting = computed(() => acceptingAllQuestIds.value.size > 0)
 
+const claimableCount = computed(() => {
+  return filteredQuests.value.filter(q => q.user_status?.completed_at && !q.user_status?.claimed_at).length
+})
+
 const emptyStateText = computed(() => {
   if (hasActiveFilters.value) return t('home.empty_filtered')
   switch (selectedPreset.value) {
@@ -1590,6 +1597,44 @@ async function claimReward(quest: Quest) {
     toast.error({ title: t('toast.failed_claim'), description: String(error) })
   } finally {
     claimingQuest.value = null
+  }
+}
+
+const claimingAll = ref(false)
+async function claimAllRewards() {
+  if (claimingAll.value) return
+  claimingAll.value = true
+
+  try {
+    const toClaim = filteredQuests.value.filter(
+      q => q.user_status?.completed_at && !q.user_status?.claimed_at
+    )
+    if (toClaim.length === 0) return
+
+    if (questsStore.cdpAvailable) {
+      for (const quest of toClaim) {
+        const questPath = `/quest-home#${encodeURIComponent(quest.id)}`
+        await navigateDiscordSpa(questPath, questsStore.cdpPort)
+        await new Promise(resolve => setTimeout(resolve, 500))
+      }
+    } else {
+      for (const quest of toClaim) {
+        try {
+          await claimQuestReward(quest.id)
+          await new Promise(resolve => setTimeout(resolve, 300))
+        } catch (e) {
+          console.error('Failed to claim quest:', quest.id, e)
+        }
+      }
+      await questsStore.fetchQuests(true, true)
+    }
+
+    toast.success({ title: t('toast.claim_all_done', { count: toClaim.length }) })
+  } catch (error) {
+    console.error('Failed to claim all rewards:', error)
+    toast.error({ title: t('toast.failed_claim'), description: String(error) })
+  } finally {
+    claimingAll.value = false
   }
 }
 </script>

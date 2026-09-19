@@ -17,9 +17,11 @@ defineProps<{
   refreshDisabled?: boolean
   batchDisabled?: boolean
   acceptCount: number
+  claimCount: number
   completeAllCount: number
   videoCount: number
   gameCount: number
+  claimAllDisabled?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -27,6 +29,7 @@ const emit = defineEmits<{
   toggleFilters: []
   refresh: []
   acceptAll: []
+  claimAll: []
   completeAll: []
   completeVideo: []
   completeGame: []
@@ -72,11 +75,14 @@ const emit = defineEmits<{
 
     <BatchActionsMenu
       :accept-count="acceptCount"
+      :claim-count="claimCount"
       :complete-all-count="completeAllCount"
       :video-count="videoCount"
       :game-count="gameCount"
       :disabled="batchDisabled"
+      :claim-all-disabled="claimAllDisabled"
       @accept-all="emit('acceptAll')"
+      @claim-all="emit('claimAll')"
       @complete-all="emit('completeAll')"
       @complete-video="emit('completeVideo')"
       @complete-game="emit('completeGame')"

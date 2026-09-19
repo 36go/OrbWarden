@@ -1548,7 +1548,6 @@ async fn get_quest_decisions_debug(
 #[tauri::command]
 async fn claim_quest_reward(
     quest_id: String,
-    platform: Option<String>,
     state: State<'_, AppState>,
 ) -> Result<serde_json::Value, String> {
     let client = {
@@ -1560,7 +1559,7 @@ async fn claim_quest_reward(
     };
 
     client
-        .claim_quest_reward(&quest_id, platform)
+        .claim_quest_reward(&quest_id)
         .await
         .map_err(|e| format!("Failed to claim quest reward: {}", e))
 }

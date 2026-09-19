@@ -103,6 +103,34 @@ pub fn launch_discord_with_cdp(options: LaunchOptions) -> Result<LaunchResult, L
             &StdCdpProbe::default(),
         );
     }
+    if let Some(installation) = options.installation.clone() {
+        if matches!(
+            &installation.launch_target,
+            crate::LaunchTarget::Flatpak { .. }
+        ) && installation.provider_id == ProviderId::official_discord()
+        {
+            return launch_flatpak_with_cdp(
+                options,
+                &installation,
+                &StdCdpProbe::default(),
+            );
+        }
+    }
+    #[cfg(target_os = "linux")]
+    if options.installation.is_none() {
+        let native_installs = SystemPlatform.find_installs()?;
+        if native_installs.is_empty()
+            && crate::provider::flatpak_is_installed("com.discordapp.Discord")
+        {
+            let installation =
+                crate::provider::flatpak_official_discord_installation("com.discordapp.Discord");
+            return launch_flatpak_with_cdp(
+                options,
+                &installation,
+                &StdCdpProbe::default(),
+            );
+        }
+    }
     launch_with_backends(options, &SystemPlatform, &StdCdpProbe::default())
 }
 
@@ -216,7 +244,7 @@ fn flatpak_result(
         port: options.port,
         pid,
         cdp_connected,
-        provider_id: ProviderId::vesktop(),
+        provider_id: installation.provider_id.clone(),
         installation_id: Some(installation.id.clone()),
         variant_id: installation.variant_id.clone(),
         ownership: if outcome == LaunchOutcome::Spawned {

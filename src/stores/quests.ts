@@ -494,6 +494,11 @@ export const useQuestsStore = defineStore('quests', () => {
       const progressPct = (secondsNeeded > 0) ? (initialProgress / secondsNeeded) * 100 : 0
 
       if (gameQuestMode.value === 'cdp') {
+        if (!cdpAvailable.value) {
+          error.value = 'CDP mode is selected but Discord CDP is not available. Please ensure Discord is running with CDP enabled.'
+          loading.value = false
+          return
+        }
         // CDP mode: use Discord's internal api.post() for video progress
         await startCdpQuest(questId, 'video', '', '', secondsNeeded, initialProgress, cdpPort.value)
       } else {
@@ -544,6 +549,18 @@ export const useQuestsStore = defineStore('quests', () => {
 
       // Check mode: 'cdp' uses CDP injection, 'heartbeat' uses direct API calls, 'simulate' runs fake game
       if (gameQuestMode.value === 'cdp') {
+        if (!cdpAvailable.value) {
+          softError.value = {
+            code: 'SIMULATION_EXECUTABLE_OS_UNSUPPORTED',
+            message: 'CDP mode is selected but Discord CDP is not available. Please ensure Discord is running with CDP enabled.',
+            gameName: quest.config.messages.game_title || quest.config.application?.name || 'Game',
+            questId: quest.id,
+            recommendedMode: 'cdp',
+            recoverable: true,
+          }
+          loading.value = false
+          return
+        }
         // CDP mode - inject into Discord client, no game simulation needed
         console.log(`Starting game quest via CDP for AppID: ${appId}`)
         const appName = quest.config.application?.name || quest.config.messages.game_title || 'Game'
@@ -1182,21 +1199,13 @@ export const useQuestsStore = defineStore('quests', () => {
     stopPolling()
   }
 
-  // Check CDP availability and auto-fallback if mode is 'cdp' but CDP isn't reachable
+  // Check CDP availability without overriding the user's chosen mode
   async function initCdpMode() {
     try {
       const status = await checkCdpStatus(cdpPort.value)
       cdpAvailable.value = status.connected
-      if (gameQuestMode.value === 'cdp' && !status.connected) {
-        console.warn('CDP mode selected but CDP not available — falling back to simulate mode')
-        gameQuestMode.value = 'simulate'
-      }
     } catch {
       cdpAvailable.value = false
-      if (gameQuestMode.value === 'cdp') {
-        console.warn('CDP check failed — falling back to simulate mode')
-        gameQuestMode.value = 'simulate'
-      }
     }
   }
 

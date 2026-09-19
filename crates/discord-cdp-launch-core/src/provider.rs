@@ -66,10 +66,15 @@ impl DesktopClientProvider for OfficialDiscordProvider {
     }
 
     fn discover(&self) -> Result<Vec<ClientInstallation>, LaunchError> {
-        Ok(find_discord_installs()?
+        let mut installs: Vec<ClientInstallation> = find_discord_installs()?
             .into_iter()
             .map(official_installation)
-            .collect())
+            .collect();
+        #[cfg(target_os = "linux")]
+        if flatpak_is_installed("com.discordapp.Discord") {
+            installs.push(flatpak_official_discord_installation("com.discordapp.Discord"));
+        }
+        Ok(installs)
     }
 
     fn validate_target(&self, target: &LaunchTarget) -> ValidationState {
@@ -262,6 +267,29 @@ pub fn flatpak_vesktop_installation(app_id: &str) -> ClientInstallation {
         provider_id,
         variant_id: Some(VariantId("flatpak".into())),
         display_name: "Vesktop (Flatpak)".into(),
+        source: DiscoverySource::OsMetadata,
+        launch_target: target,
+        capabilities: ClientCapabilities {
+            cdp: true,
+            local_token: false,
+            restore_normal: true,
+        },
+        validation: ValidationState::Valid,
+    }
+}
+
+#[cfg(target_os = "linux")]
+pub fn flatpak_official_discord_installation(app_id: &str) -> ClientInstallation {
+    let provider_id = ProviderId::official_discord();
+    let target = LaunchTarget::Flatpak {
+        app_id: app_id.to_string(),
+        command: Some("flatpak".into()),
+    };
+    ClientInstallation {
+        id: installation_id_for_key(&provider_id, &format!("flatpak:{app_id}")),
+        provider_id,
+        variant_id: Some(VariantId("stable".into())),
+        display_name: "Discord (Flatpak)".into(),
         source: DiscoverySource::OsMetadata,
         launch_target: target,
         capabilities: ClientCapabilities {
@@ -486,7 +514,7 @@ fn installation_id_for_key(provider_id: &ProviderId, key: &str) -> InstallationI
 }
 
 #[cfg(target_os = "linux")]
-fn flatpak_is_installed(app_id: &str) -> bool {
+pub fn flatpak_is_installed(app_id: &str) -> bool {
     std::process::Command::new("flatpak")
         .args(["info", app_id])
         .stdout(std::process::Stdio::null())
