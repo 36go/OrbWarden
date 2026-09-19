@@ -49,6 +49,10 @@ async function handleManualLogin() {
           <LogOut class="h-4 w-4" />
           {{ t('general.logout') }}
         </Button>
+        <Button variant="outline" class="gap-2" @click="handleAutoDetect">
+          <UserRound class="h-4 w-4" />
+          {{ t('account.add_account') }}
+        </Button>
       </div>
 
       <div v-else class="space-y-4">

@@ -33,6 +33,19 @@
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
 
+  /* OrbWarden brand palette */
+  --color-electric: #00d9ff;
+  --color-royal: #3867ff;
+  --color-neon: #9b4dff;
+  --color-violet: #c45cff;
+  --color-gold: #ffb52e;
+  --color-quest: #27e39b;
+  --color-navy: #070b1a;
+  --color-cardblue: #0d1428;
+
+  --background-image-brand: linear-gradient(135deg, #00d9ff 0%, #3867ff 50%, #9b4dff 100%);
+  --background-image-brand-soft: linear-gradient(135deg, hsl(189 100% 50% / 0.14), hsl(226 100% 61% / 0.12), hsl(266 100% 65% / 0.16));
+
   --radius-xl: calc(var(--radius) + 4px);
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
@@ -82,68 +95,71 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* OrbWarden light theme */
+    --background: 224 100% 98%;
+    --foreground: 228 58% 9%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 228 58% 9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 228 58% 9%;
 
-    /* Discord Blurple: #5865F2 -> HSL 235 86% 65% */
-    --primary: 235 86% 65%;
-    --primary-foreground: 210 40% 98%;
+    /* Royal Blue as Primary on light surfaces for contrast */
+    --primary: 226 100% 61%;
+    --primary-foreground: 224 100% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 226 35% 93%;
+    --secondary-foreground: 230 45% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 226 40% 95%;
+    --muted-foreground: 225 20% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 266 60% 94%;
+    --accent-foreground: 268 70% 38%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 226 30% 88%;
+    --input: 226 30% 88%;
+    --ring: 189 100% 45%;
 
     --radius: 0.5rem;
   }
 
   .dark {
-    /* Using a nice dark gray background, slightly lighter than pure black */
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* OrbWarden dark theme — Deep Space Navy */
+    --background: 228 58% 6%;      /* #070B1A */
+    --foreground: 224 100% 98%;    /* #F4F7FF Ice White */
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 224 13% 10%;           /* #0D1428 Dark Blue */
+    --card-foreground: 224 100% 98%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 224 14% 9%;
+    --popover-foreground: 224 100% 98%;
 
-    /* Discord Blurple kept as Primary */
-    --primary: 235 86% 65%;
-    --primary-foreground: 210 40% 98%;
+    /* Electric Blue Primary */
+    --primary: 189 100% 50%;       /* #00D9FF */
+    --primary-foreground: 228 58% 4%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    /* Royal Blue Secondary */
+    --secondary: 226 100% 61%;     /* #3867FF */
+    --secondary-foreground: 224 100% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 226 24% 13%;
+    --muted-foreground: 225 23% 62%; /* #8994B5 Slate Blue */
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    /* Neon Purple Accent */
+    --accent: 266 100% 65%;        /* #9B4DFF */
+    --accent-foreground: 224 100% 98%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 352 90% 58%;
+    --destructive-foreground: 224 100% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 226 30% 16%;
+    --input: 226 26% 16%;
+    --ring: 189 100% 50%;
   }
 }
 
@@ -214,4 +230,15 @@ html.theme-view-transition::view-transition-new(root) {
 /* Improve dark mode card visibility */
 .dark .border-border\/50 {
   border-color: hsl(var(--border) / 0.8);
+}
+
+/* Prevent text selection except in interactive/error areas */
+.app-container, main, .quest-card, .settings-section {
+  user-select: none;
+  -webkit-user-select: none;
+}
+/* Allow selection in error messages, toasts, and notifications */
+.toast, [role="alert"], .error-message, .text-destructive, pre, code, .selectable {
+  user-select: text !important;
+  -webkit-user-select: text !important;
 }

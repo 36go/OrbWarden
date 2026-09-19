@@ -170,17 +170,17 @@ function removeBubble(id: number) {
           </span>
         </div>
 
-        <p>{{ t('settings.about_desc') }}</p>
+        <p>OrbWarden is a Discord quest automation helper that completes video, stream, game, and activity quests automatically. Supports CDP mode, simulated game mode, batch quest processing, and multi-account management.</p>
 
         <a
           href="#"
-          @click.prevent="openExternal('https://github.com/Masterain98/discord-quest-helper')"
+          @click.prevent="openExternal('https://github.com/36go/discord-project')"
           class="flex items-center justify-between rounded-lg border bg-muted/30 px-3 py-2 transition-colors hover:bg-muted/60"
         >
           <span class="flex min-w-0 items-center gap-2">
             <img src="/icons/github-mark.svg" alt="GitHub" class="h-5 w-5 shrink-0 dark:hidden" />
             <img src="/icons/github-mark-white.svg" alt="GitHub" class="hidden h-5 w-5 shrink-0 dark:block" />
-            <span class="truncate text-primary">Masterain98/discord-quest-helper</span>
+            <span class="truncate text-primary">36go/discord-project</span>
           </span>
           <ExternalLink class="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
         </a>
@@ -190,7 +190,7 @@ function removeBubble(id: number) {
             variant="outline"
             size="sm"
             :class="settingToneClass.info.buttonSoft"
-            @click="openExternal('https://github.com/Masterain98/discord-quest-helper/issues/new/choose')"
+            @click="openExternal('https://github.com/36go/discord-project/issues/new')"
           >
             {{ t('settings.feedback') }}
           </Button>
@@ -225,74 +225,71 @@ function removeBubble(id: number) {
     </SettingsSectionCard>
 
     <SettingsSectionCard
-      :title="t('settings.credits')"
+      :title="t('settings.tech_stack')"
       :icon="Link2"
       tone="info"
       content-class="space-y-4 text-sm text-muted-foreground"
     >
         <div>
-          <p class="mb-2 font-medium text-foreground">{{ t('settings.credits_desc') }}</p>
-          <ul class="space-y-2">
-            <li>
-              <a href="#" @click.prevent="openExternal('https://github.com/markterence/discord-quest-completer')" class="flex items-center justify-between rounded-lg border bg-card px-3 py-2 text-sm transition-colors hover:bg-muted/50">
-                <span class="flex min-w-0 items-center gap-2">
-                  <img src="/icons/github-mark.svg" alt="GitHub" class="h-4 w-4 shrink-0 dark:hidden" />
-                  <img src="/icons/github-mark-white.svg" alt="GitHub" class="hidden h-4 w-4 shrink-0 dark:block" />
-                  <span class="truncate">markterence/discord-quest-completer</span>
-                </span>
-                <ExternalLink class="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-              </a>
-            </li>
-            <li>
-              <a href="#" @click.prevent="openExternal('https://github.com/power0matin/discord-quest-auto-completer')" class="flex items-center justify-between rounded-lg border bg-card px-3 py-2 text-sm transition-colors hover:bg-muted/50">
-                <span class="flex min-w-0 items-center gap-2">
-                  <img src="/icons/github-mark.svg" alt="GitHub" class="h-4 w-4 shrink-0 dark:hidden" />
-                  <img src="/icons/github-mark-white.svg" alt="GitHub" class="hidden h-4 w-4 shrink-0 dark:block" />
-                  <span class="truncate">power0matin/discord-quest-auto-completer</span>
-                </span>
-                <ExternalLink class="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-              </a>
-            </li>
-            <li>
-              <a href="#" @click.prevent="openExternal('https://github.com/taisrisk/Discord-Quest-Helper')" class="flex items-center justify-between rounded-lg border bg-card px-3 py-2 text-sm transition-colors hover:bg-muted/50">
-                <span class="flex min-w-0 items-center gap-2">
-                  <img src="/icons/github-mark.svg" alt="GitHub" class="h-4 w-4 shrink-0 dark:hidden" />
-                  <img src="/icons/github-mark-white.svg" alt="GitHub" class="hidden h-4 w-4 shrink-0 dark:block" />
-                  <span class="truncate">taisrisk/Discord-Quest-Helper</span>
-                </span>
-                <ExternalLink class="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-              </a>
-            </li>
-            <li>
-              <a href="#" @click.prevent="openExternal('https://gist.github.com/aamiaa/204cd9d42013ded9faf646fae7f89fbb')" class="flex items-center justify-between rounded-lg border bg-card px-3 py-2 text-sm transition-colors hover:bg-muted/50">
-                <span class="flex min-w-0 items-center gap-2">
-                  <img src="/icons/github-mark.svg" alt="GitHub" class="h-4 w-4 shrink-0 dark:hidden" />
-                  <img src="/icons/github-mark-white.svg" alt="GitHub" class="hidden h-4 w-4 shrink-0 dark:block" />
-                  <span class="truncate">aamiaa/CompleteDiscordQuest.md</span>
-                </span>
-                <ExternalLink class="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-              </a>
-            </li>
-            <li>
-              <a href="#" @click.prevent="openExternal('https://docs.discord.food/')" class="flex items-center justify-between rounded-lg border bg-card px-3 py-2 text-sm transition-colors hover:bg-muted/50">
-                <span class="flex min-w-0 items-center gap-2">
-                  <img src="/icons/discord-food-docs.png" alt="docs.discord.food" class="h-4 w-4 shrink-0 rounded-sm" />
-                  <span class="truncate">docs.discord.food</span>
-                </span>
-                <ExternalLink class="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-              </a>
-            </li>
-          </ul>
+          <div class="flex flex-wrap gap-2">
+            <Badge variant="outline">Python</Badge>
+            <Badge variant="outline">Java</Badge>
+            <Badge variant="outline">JavaScript</Badge>
+            <Badge variant="outline">TypeScript</Badge>
+            <Badge variant="outline">PostgreSQL</Badge>
+            <Badge variant="outline">MySQL</Badge>
+            <Badge variant="outline">MongoDB</Badge>
+            <Badge variant="outline">SQLite</Badge>
+            <Badge variant="outline">React</Badge>
+            <Badge variant="outline">Node.js</Badge>
+            <Badge variant="outline">Express</Badge>
+            <Badge variant="outline">Django</Badge>
+            <Badge variant="outline">Git</Badge>
+            <Badge variant="outline">GitHub</Badge>
+            <Badge variant="outline">Docker</Badge>
+            <Badge variant="outline">Linux</Badge>
+            <Badge variant="outline">Rust</Badge>
+            <Badge variant="outline">Vue 3</Badge>
+            <Badge variant="outline">Tauri</Badge>
+            <Badge variant="outline">TailwindCSS</Badge>
+          </div>
         </div>
         <div>
-          <p class="mb-1 font-medium text-foreground">{{ t('settings.tech_stack') }}</p>
-          <div class="flex flex-wrap gap-2">
-            <Badge variant="outline">Tauri</Badge>
-            <Badge variant="outline">Vue 3</Badge>
-            <Badge variant="outline">shadcn-vue</Badge>
-            <Badge variant="outline">TailwindCSS</Badge>
-            <Badge variant="outline">vue-i18n</Badge>
+          <p class="mb-2 font-medium text-foreground">Developer</p>
+          <a href="#" @click.prevent="openExternal('https://github.com/36go')" class="flex items-center justify-between rounded-lg border bg-card px-3 py-2 text-sm transition-colors hover:bg-muted/50">
+            <span class="flex min-w-0 items-center gap-2">
+              <img src="/icons/github-mark.svg" alt="GitHub" class="h-4 w-4 shrink-0 dark:hidden" />
+              <img src="/icons/github-mark-white.svg" alt="GitHub" class="hidden h-4 w-4 shrink-0 dark:block" />
+              <span class="truncate">Masterain</span>
+            </span>
+            <ExternalLink class="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+          </a>
+        </div>
+        <div class="rounded-lg border px-4 py-3">
+          <div class="flex items-center justify-between gap-3">
+            <div class="space-y-0.5">
+              <Label class="text-sm font-medium">Receive Updates</Label>
+              <p class="text-xs text-muted-foreground">Stay notified about new releases</p>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              :class="settingToneClass.info.buttonSoft"
+              @click="openExternal('https://github.com/36go/discord-project/releases')"
+            >
+              View Releases
+            </Button>
           </div>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            :class="settingToneClass.info.buttonSoft"
+            @click="openExternal('https://github.com/36go/discord-project/issues/new')"
+          >
+            {{ t('settings.feedback') }}
+          </Button>
         </div>
     </SettingsSectionCard>
   </div>

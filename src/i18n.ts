@@ -15,6 +15,7 @@ import fr from './locales/fr.json'
 import ptPT from './locales/pt-PT.json'
 import id from './locales/id.json'
 import pl from './locales/pl.json'
+import ar from './locales/ar.json'
 
 const polishPluralRule = (choice: number, choicesLength: number): number => {
     if (choicesLength !== 3) return choice === 1 ? 0 : 1
@@ -44,6 +45,7 @@ function getDefaultLocale(): string {
         if (v.startsWith('ko')) return 'ko'
         if (v.startsWith('ru')) return 'ru'
         if (v.startsWith('es')) return 'es'
+        if (v.startsWith('ar')) return 'ar'
         return 'en'
     }
 
@@ -76,7 +78,8 @@ const i18n = createI18n({
         fr,
         'pt-PT': ptPT,
         id,
-        pl
+        pl,
+        ar
     }
 })
 

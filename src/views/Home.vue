@@ -1630,6 +1630,11 @@ async function claimAllRewards() {
     }
 
     toast.success({ title: t('toast.claim_all_done', { count: toClaim.length }) })
+
+    // Auto-refresh orbs balance after claiming rewards
+    try {
+      await questsStore.fetchOrbsBalance()
+    } catch { /* orbs refresh is non-critical */ }
   } catch (error) {
     console.error('Failed to claim all rewards:', error)
     toast.error({ title: t('toast.failed_claim'), description: String(error) })

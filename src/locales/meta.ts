@@ -15,6 +15,7 @@ export const supportedLocales = [
   { code: 'pt-PT', label: 'Português (Portugal)' },
   { code: 'id', label: 'Bahasa Indonesia' },
   { code: 'pl', label: 'Polski' },
+  { code: 'ar', label: 'العربية' },
 ] as const
 
 export type SupportedLocale = (typeof supportedLocales)[number]['code']

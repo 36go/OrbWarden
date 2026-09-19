@@ -347,6 +347,9 @@ watch(
       </div>
     </div>
     <Toaster />
+    <footer v-if="showStandardShell && authStore.user" class="mt-auto border-t border-border/40 py-3 text-center text-[11px] text-muted-foreground/60 select-none">
+      Made with ❤ by <a href="#" @click.prevent="open('https://github.com/36go')" class="underline hover:text-muted-foreground">Masterain</a>
+    </footer>
   </div>
 </template>
 
