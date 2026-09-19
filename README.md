@@ -135,6 +135,12 @@ OrbWarden uses:
 - **Discord API** — Quest and reward management
 - **WebView2 / WebKit** — Native web rendering
 
+## 🔨 Community
+
+Join our Discord server for support, updates, and discussion:
+
+[![Discord](https://img.shields.io/badge/Discord-Join%20Server-5865F2)](https://discord.gg/se6VMAbjC)
+
 ## License
 
 [MIT](LICENSE) — (c) 2025 Masterain
