@@ -10,13 +10,16 @@
 
 <p align="center">
   <a href="https://github.com/36go/OrbWarden/releases/tag/v1.1.1">
-    <img src="https://img.shields.io/badge/version-1.1.1-blue" alt="Version" />
+    <img src="https://img.shields.io/badge/version-1.1.1-blue?style=for-the-badge&logo=github" alt="Version" />
   </a>
   <a href="https://github.com/36go/OrbWarden/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/license-MIT-green" alt="License" />
+    <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge&logo=open-source-initiative" alt="License" />
   </a>
-  <img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey" alt="Platform" />
-  <img src="https://img.shields.io/badge/Tauri-2.x-orange" alt="Tauri" />
+  <img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=for-the-badge&logo=windows" alt="Platform" />
+  <img src="https://img.shields.io/badge/Tauri-2.x-orange?style=for-the-badge&logo=tauri" alt="Tauri" />
+  <a href="https://discord.gg/se6VMAbjC">
+    <img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" />
+  </a>
 </p>
 
 ---
@@ -137,9 +140,9 @@ OrbWarden uses:
 
 ## 🔨 Community
 
-Join our Discord server for support, updates, and discussion:
-
-[![Discord](https://img.shields.io/badge/Discord-Join%20Server-5865F2)](https://discord.gg/se6VMAbjC)
+<a href="https://discord.gg/se6VMAbjC">
+  <img src="https://img.shields.io/badge/Join_Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Join our Discord" />
+</a>
 
 ## License
 
